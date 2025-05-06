@@ -3,6 +3,13 @@ import 'dart:math';
 
 import 'package:flutter/services.dart';
 
+extension DateTimeExtensions on DateTime {
+  bool get isToday {
+    final now = DateTime.now();
+    return day == now.day && month == now.month && year == now.year;
+  }
+}
+
 extension NullableNum on num? {
   num get nullToZero => this ?? 0;
 }
@@ -43,6 +50,22 @@ extension StringExt on String? {
   double get parseDouble => double.tryParse(this ?? '') ?? 0;
 
   int get parseInt => int.tryParse(this ?? '') ?? 0;
+
+  String get format {
+    String value = '';
+    String st = this ?? "";
+    for (int i = 0; i <= st.length - 1; i++) {
+      if (i == 0) {
+        value = st[0];
+      } else if (st[i] == '@') {
+        value += '@';
+      } else {
+        value += '*';
+      }
+    }
+
+    return value;
+  }
 }
 
 extension NullableListExt on List? {
@@ -50,13 +73,19 @@ extension NullableListExt on List? {
 }
 
 extension StringCasingExtension on String {
-  String toCapitalized() => length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
+  String toCapitalized() =>
+      length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
 
-  String toTitleCase() => replaceAll(RegExp(' +'), ' ').split(' ').map((str) => str.toCapitalized()).join(' ');
+  String toTitleCase() => replaceAll(RegExp(' +'), ' ')
+      .split(' ')
+      .map((str) => str.toCapitalized())
+      .join(' ');
 }
 
 String replaceCharAt(String oldString, int index, String newChar) {
-  return oldString.substring(0, index) + newChar + oldString.substring(index + 1);
+  return oldString.substring(0, index) +
+      newChar +
+      oldString.substring(index + 1);
 }
 
 String ellipsisString(String? text, int limit) {
@@ -100,8 +129,8 @@ int random(int min, int max) {
   return min + Random().nextInt(max - min);
 }
 
-double doubleInRange(Random source, num start, num end) => source.nextDouble() * (end - start) + start;
-
+double doubleInRange(Random source, num start, num end) =>
+    source.nextDouble() * (end - start) + start;
 
 T? tryCast<T>(dynamic value, {T? fallback}) {
   try {

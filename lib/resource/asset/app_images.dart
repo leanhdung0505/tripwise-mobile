@@ -15,4 +15,8 @@ class AppImages {
   static const icCheckedBox = '${assetsIcon}ic_checked_box.svg';
   static const icGoogle = '${assetsIcon}ic_google.svg';
   static const icFacebook = '${assetsIcon}ic_facebook.svg';
+  static const icArrowLeft = '${assetsIcon}ic_arrow_left.svg';
+  static const icPerson = '${assetsIcon}ic_person.svg';
+
+  static const animationCheck = '${assetsIcon}check_animation.riv';
 }

@@ -11,6 +11,7 @@ class AppButton extends StatelessWidget {
     this.height,
     this.width,
     this.unEnabled = false,
+    this.isLoading = false, 
     TextStyle? textStyle,
     EdgeInsetsGeometry? padding,
     BorderRadius? borderRadius,
@@ -33,6 +34,7 @@ class AppButton extends StatelessWidget {
   final double? width;
   final VoidCallback? onPressed;
   final bool unEnabled;
+  final bool isLoading; 
   final EdgeInsetsGeometry padding;
   final BorderRadius borderRadius;
   final TextStyle textStyle;
@@ -45,7 +47,7 @@ class AppButton extends StatelessWidget {
       width: width ?? double.infinity,
       height: height,
       child: ElevatedButton(
-        onPressed: unEnabled ? null : onPressed,
+        onPressed: unEnabled || isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
           elevation: elevation,
           padding: padding,
@@ -60,13 +62,32 @@ class AppButton extends StatelessWidget {
           disabledBackgroundColor: enabledColor.withOpacity(0.4),
           disabledForegroundColor: textColor.withOpacity(0.4),
         ),
-        child: Text(
-          text ?? "",
-          textAlign: TextAlign.center,
-          style: textStyle.copyWith(
-            color: unEnabled ? textColor.withOpacity(0.4) : textColor,
-          ),
-        ),
+        child: isLoading
+            ? Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 20.h,
+                    width: 20.h,
+                    child: CircularProgressIndicator(
+                      color: textColor,
+                      strokeWidth: 2.0,
+                    ),
+                  ),
+                  SizedBox(width: 8.w),
+                  Text(
+                    'Loading...',
+                    style: textStyle.copyWith(color: textColor),
+                  ),
+                ],
+              )
+            : Text(
+                text ?? "",
+                textAlign: TextAlign.center,
+                style: textStyle.copyWith(
+                  color: unEnabled ? textColor.withOpacity(0.4) : textColor,
+                ),
+              ),
       ),
     );
   }
