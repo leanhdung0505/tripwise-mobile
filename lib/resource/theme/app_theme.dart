@@ -9,6 +9,7 @@ class AppTheme {
 
   static const _lightAppColors = AppColorsExtension(
     primary: Color(0xFFE53F34),
+    
     background: Color(0xFF181A20),
     text: Color(0xFFFFFFFF),
     navBar: Color(0xFF000000),

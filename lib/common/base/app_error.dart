@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import '../../common/base/widgets/base_widgets.dart';
 
-
 enum AppErrorType {
   network,
   badRequest,
@@ -46,13 +45,20 @@ class AppError extends BaseCustomWidgets {
           final response = error.response;
           try {
             if (response != null && response.data != null) {
-              final errors = response.data['errors'];
-              if (errors is List && errors.isNotEmpty) {
-                final firstError = errors[0];
-                if (firstError is Map<String, dynamic>) {
-                  String originalDetail = firstError['detail'];
-                  errorData = firstError['code'];
-                  message = originalDetail.tr;
+              // Kiểm tra nếu response chứa trường 'detail'
+              if (response.data is Map<String, dynamic> &&
+                  response.data['detail'] != null) {
+                message = response.data['detail']; // Lấy thông báo từ 'detail'
+              } else if (response.data['errors'] != null) {
+                // Xử lý nếu có trường 'errors'
+                final errors = response.data['errors'];
+                if (errors is List && errors.isNotEmpty) {
+                  final firstError = errors[0];
+                  if (firstError is Map<String, dynamic>) {
+                    String originalDetail = firstError['detail'];
+                    errorData = firstError['code'];
+                    message = originalDetail.tr;
+                  }
                 }
               }
               code = response.statusCode;
