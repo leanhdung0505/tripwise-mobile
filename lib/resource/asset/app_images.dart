@@ -17,6 +17,28 @@ class AppImages {
   static const icFacebook = '${assetsIcon}ic_facebook.svg';
   static const icArrowLeft = '${assetsIcon}ic_arrow_left.svg';
   static const icPerson = '${assetsIcon}ic_person.svg';
+  static const icCalendar = '${assetsIcon}ic_calendar.svg';
+  static const icCalendar2 = '${assetsIcon}ic_calendar2.svg';
+  static const icArrowLeft2 = '${assetsIcon}ic_arrow_left2.svg';
+  static const icArrowRight2 = '${assetsIcon}ic_arrow_right2.svg';
+  static const icBeach = '${assetsIcon}ic_beach.svg';
+  static const icMuseum = '${assetsIcon}ic_museum.svg';
+  static const icFood = '${assetsIcon}ic_food.svg';
+  static const icShopping = '${assetsIcon}ic_shopping.svg';
+  static const icHiking = '${assetsIcon}ic_hiking.svg';
+  static const icRelaxation = '${assetsIcon}ic_relaxation.svg';
+  static const icAdventure = '${assetsIcon}ic_adventure.svg';
+  static const icSpa = '${assetsIcon}ic_spa.svg';
+  static const icCultural = '${assetsIcon}ic_cultural.svg';
+  static const icHistorical = '${assetsIcon}ic_historical.svg';
+  static const icNature = '${assetsIcon}ic_nature.svg';
+  static const icSightseeing = '${assetsIcon}ic_sightseeing.svg';
+  static const icToggleOn = '${assetsIcon}ic_toggle_on.svg';
+  static const icToggleOff = '${assetsIcon}ic_toggle_off.svg';
+  static const icBudget = '${assetsIcon}ic_budget.svg';
+  static const icEconomy = '${assetsIcon}ic_economy.svg';
+  static const icNormal = '${assetsIcon}ic_normal.svg';
+  static const icLuxury = '${assetsIcon}ic_luxury.svg';
 
   static const animationCheck = '${assetsIcon}check_animation.riv';
 }

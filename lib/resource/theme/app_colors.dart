@@ -16,6 +16,12 @@ class AppColors {
   static const Color color2A4ECA = Color(0xFF2A4ECA);
   static const Color errorColor = Color(0xFFEC6767);
   static const Color color262626 = Color(0xFF262626);
+  static const Color colorE47E0A = Color(0xFFE47E0A);
+  static const Color colorE6E6E6 = Color(0xFFE6E6E6);
+  static const Color color0C092A = Color(0xFF0C092A);
+  static const Color color0AA3E4 = Color(0xFF0AA3E4);
+  static const Color color0AE4E4 = Color(0xFF0AE4E4);
+  static const Color colorE4CB0A = Color(0xFFE4CB0A);
 }
 
 ColorFilter greyFilter = const ColorFilter.matrix(<double>[

@@ -38,7 +38,7 @@ class VerifyCodePage extends BasePage<VerifyCodeController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Verify Code',
+                      "verifyCodeTitle".tr, 
                       style: AppStyles.STYLE_32_BOLD.copyWith(
                         color: AppColors.color3461FD,
                       ),
@@ -54,8 +54,8 @@ class VerifyCodePage extends BasePage<VerifyCodeController> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text:
-                                      "We sent a reset link to enter 5 digit code that mentioned in the email ",
+                                  text: "verifyCodeDescription"
+                                      .tr, 
                                   style: AppStyles.STYLE_14.copyWith(
                                     color: AppColors.color7C8BA0,
                                   ),
@@ -82,7 +82,7 @@ class VerifyCodePage extends BasePage<VerifyCodeController> {
                     SizedBox(height: 32.h),
                     Obx(
                       () => AppButton(
-                        text: 'Verify',
+                        text: "verifyCodeButton".tr, 
                         onPressed: controller.onVerifyOtp,
                         bgColor: AppColors.color3461FD,
                         height: 60.h,
@@ -95,7 +95,7 @@ class VerifyCodePage extends BasePage<VerifyCodeController> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "Didn't get OTP? ",
+                          "didNotGetOtp".tr, 
                           style: AppStyles.STYLE_14.copyWith(
                             color: AppColors.color7C8BA0,
                           ),
@@ -103,7 +103,7 @@ class VerifyCodePage extends BasePage<VerifyCodeController> {
                         InkWell(
                           onTap: controller.onResendOtp,
                           child: Text(
-                            "Resend OTP",
+                            "resend".tr, 
                             style: AppStyles.STYLE_14.copyWith(
                               color: AppColors.color3461FD,
                             ),

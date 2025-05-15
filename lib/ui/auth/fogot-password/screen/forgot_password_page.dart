@@ -38,14 +38,14 @@ class ForgotPasswordPage extends BasePage<ForgotPasswordController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Forgot Password',
+                      "forgotPasswordTitle".tr, 
                       style: AppStyles.STYLE_32_BOLD.copyWith(
                         color: AppColors.color3461FD,
                       ),
                     ),
                     SizedBox(height: 8.h),
                     Text(
-                      'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem Ipsum.',
+                      "forgotPasswordDescription".tr, 
                       style: AppStyles.STYLE_14.copyWith(
                         color: AppColors.color7C8BA0,
                       ),
@@ -56,9 +56,11 @@ class ForgotPasswordPage extends BasePage<ForgotPasswordController> {
                       height: 60.h,
                       isRequired: false,
                       textInputAction: TextInputAction.done,
-                      hintText: "enterYourEmail".tr,
+                      hintText: "enterYourEmail".tr, 
                       contentPadding: EdgeInsets.symmetric(
-                          vertical: 18.h, horizontal: 24.w),
+                        vertical: 18.h,
+                        horizontal: 24.w,
+                      ),
                       onChanged: controller.onTextChanged,
                       prefixIcon: FittedBox(
                         fit: BoxFit.scaleDown,
@@ -73,7 +75,7 @@ class ForgotPasswordPage extends BasePage<ForgotPasswordController> {
                     SizedBox(height: 32.h),
                     Obx(
                       () => AppButton(
-                        text: 'Send OTP',
+                        text: "sendOtp".tr, 
                         onPressed: controller.onRequestOtp,
                         bgColor: AppColors.color3461FD,
                         height: 60.h,

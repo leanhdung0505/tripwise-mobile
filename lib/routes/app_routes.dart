@@ -9,12 +9,20 @@ import 'package:trip_wise_app/ui/auth/request-otp/binding/request_otp_binding.da
 import 'package:trip_wise_app/ui/auth/request-otp/screen/request_otp_page.dart';
 import 'package:trip_wise_app/ui/auth/verify-code/binding/verify_code_binding.dart';
 import 'package:trip_wise_app/ui/auth/verify-code/screen/verify_code_page.dart';
+import 'package:trip_wise_app/ui/data-entry/budget/binding/budget_binding.dart';
+import 'package:trip_wise_app/ui/data-entry/budget/screen/budget_page.dart';
+import 'package:trip_wise_app/ui/data-entry/calendar/binding/calendar_binding.dart';
+import 'package:trip_wise_app/ui/data-entry/calendar/screen/calendar_page.dart';
+import 'package:trip_wise_app/ui/data-entry/interests/binding/interests_binding.dart';
+import 'package:trip_wise_app/ui/data-entry/interests/screen/interests_page.dart';
 import 'package:trip_wise_app/ui/main/binding/main_binding.dart';
 import 'package:trip_wise_app/ui/main/screen/main_page.dart';
 import 'package:trip_wise_app/ui/splash/binding/splash_binding.dart';
 
 import '../ui/auth/reset-password/binding/reset_password_binding.dart';
 import '../ui/auth/reset-password/screen/reset_password_page.dart';
+import '../ui/data-entry/duration/binding/duration_binding.dart';
+import '../ui/data-entry/duration/screen/duration_page.dart';
 import '../ui/splash/screen/splash_page.dart';
 import '../ui/success/binding/success_binding.dart';
 import '../ui/success/screen/success_page.dart';
@@ -29,6 +37,10 @@ abstract class PageName {
   static const verifyCodePage = '/verify-code';
   static const requestOtp = '/request-otp';
   static const successPage = '/success';
+  static const durationPage = '/duration-page';
+  static const calendarPage = '/calendar-page';
+  static const interestsPage = '/interest-page';
+  static const budgetPage = '/budget-page';
 }
 
 abstract class Argument {}
@@ -82,6 +94,26 @@ class AppPages {
       name: PageName.successPage,
       page: () => const SuccessPage(),
       binding: SuccessBinding(),
+    ),
+    GetPage(
+      name: PageName.durationPage,
+      page: () => const DurationPage(),
+      binding: DurationBinding(),
+    ),
+    GetPage(
+      name: PageName.calendarPage,
+      page: () => const CalendarPage(),
+      binding: CalendarBinding(),
+    ),
+    GetPage(
+      name: PageName.interestsPage,
+      page: () => const InterestsPage(),
+      binding: InterestsBinding(),
+    ),
+    GetPage(
+      name: PageName.budgetPage,
+      page: () => const BudgetPage(),
+      binding: BudgetBinding(),
     ),
   ];
 }

@@ -13,7 +13,7 @@ import '../../../../resource/theme/app_style.dart';
 import '../../../../utils/app_validator.dart';
 import '../controller/request_otp_controller.dart';
 
-class RequestOtpPage  extends BasePage<RequestOtpController>{
+class RequestOtpPage extends BasePage<RequestOtpController> {
   const RequestOtpPage({super.key});
 
   @override
@@ -40,14 +40,14 @@ class RequestOtpPage  extends BasePage<RequestOtpController>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Request OTP',
+                      "requestOtpTitle".tr, 
                       style: AppStyles.STYLE_32_BOLD.copyWith(
                         color: AppColors.color3461FD,
                       ),
                     ),
                     SizedBox(height: 8.h),
                     Text(
-                      'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem Ipsum.',
+                      "requestOtpDescription".tr, 
                       style: AppStyles.STYLE_14.copyWith(
                         color: AppColors.color7C8BA0,
                       ),
@@ -58,9 +58,9 @@ class RequestOtpPage  extends BasePage<RequestOtpController>{
                       height: 60.h,
                       isRequired: false,
                       textInputAction: TextInputAction.done,
-                      hintText: "enterYourEmail".tr,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
+                      hintText: "enterYourEmail".tr, 
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 18.h, horizontal: 24.w),
                       onChanged: controller.onTextChanged,
                       prefixIcon: FittedBox(
                         fit: BoxFit.scaleDown,
@@ -75,7 +75,7 @@ class RequestOtpPage  extends BasePage<RequestOtpController>{
                     SizedBox(height: 32.h),
                     Obx(
                       () => AppButton(
-                        text: 'Send OTP',
+                        text: "sendOtp".tr, 
                         onPressed: controller.onRequestOtp,
                         bgColor: AppColors.color3461FD,
                         height: 60.h,

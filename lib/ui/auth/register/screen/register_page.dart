@@ -29,14 +29,14 @@ class RegisterPage extends BasePage<RegisterController> {
             children: [
               SizedBox(height: 60.h),
               Text(
-                'Sign Up',
+                "signUp".tr,
                 style: AppStyles.STYLE_32_BOLD.copyWith(
                   color: AppColors.color3461FD,
                 ),
               ),
               SizedBox(height: 8.h),
               Text(
-                'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem Ipsum.',
+                "signUpDescription".tr,
                 style: AppStyles.STYLE_14.copyWith(
                   color: AppColors.color7C8BA0,
                 ),
@@ -46,7 +46,7 @@ class RegisterPage extends BasePage<RegisterController> {
               SizedBox(height: 32.h),
               Obx(
                 () => AppButton(
-                  text: 'Sign Up',
+                  text: "signUpButton".tr,
                   onPressed: controller.onRegister,
                   bgColor: AppColors.color3461FD,
                   height: 60.h,
@@ -66,7 +66,7 @@ class RegisterPage extends BasePage<RegisterController> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: Text(
-                      'Or',
+                      "or".tr,
                       style: AppStyles.STYLE_14.copyWith(
                         color: AppColors.color7C8BA0,
                       ),
@@ -106,7 +106,7 @@ class RegisterPage extends BasePage<RegisterController> {
                           ),
                           SizedBox(width: 8.w),
                           Text(
-                            'Facebook',
+                            'Facebook', // Không cần đa ngôn ngữ nếu tên mạng xã hội không thay đổi
                             style: AppStyles.STYLE_14.copyWith(
                               color: AppColors.color7C8BA0,
                             ),
@@ -140,7 +140,7 @@ class RegisterPage extends BasePage<RegisterController> {
                           ),
                           SizedBox(width: 8.w),
                           Text(
-                            'Google',
+                            'Google', // Không cần đa ngôn ngữ nếu tên mạng xã hội không thay đổi
                             style: AppStyles.STYLE_14.copyWith(
                               color: AppColors.color7C8BA0,
                             ),
@@ -156,7 +156,7 @@ class RegisterPage extends BasePage<RegisterController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Do you have an account? ',
+                    "doYouHaveAnAccount".tr,
                     style: AppStyles.STYLE_14.copyWith(
                       color: AppColors.color7C8BA0,
                     ),
@@ -164,33 +164,13 @@ class RegisterPage extends BasePage<RegisterController> {
                   TextButton(
                     onPressed: controller.onNavigateToLogin,
                     child: Text(
-                      'Sign In',
+                      "signIn".tr,
                       style: AppStyles.STYLE_16_BOLD.copyWith(
                         color: AppColors.color3461FD,
                       ),
                     ),
                   ),
                 ],
-              ),
-              SizedBox(height: 50.h),
-              Obx(
-                () => Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) {
-                    return AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      margin: EdgeInsets.symmetric(horizontal: 4.w),
-                      height: 8.h,
-                      width: controller.currentPage.value == index ? 35.w : 8.w,
-                      decoration: BoxDecoration(
-                        color: controller.currentPage.value == index
-                            ? AppColors.color3461FD
-                            : AppColors.color7C8BA0.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(4.r),
-                      ),
-                    );
-                  }),
-                ),
               ),
             ],
           ),
@@ -212,6 +192,7 @@ class RegisterPage extends BasePage<RegisterController> {
             isReadOnly: true,
             contentPadding:
                 EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
+            hintText: "enterYourEmail".tr,
             onChanged: controller.onTextChanged,
             prefixIcon: FittedBox(
               fit: BoxFit.scaleDown,
@@ -226,7 +207,7 @@ class RegisterPage extends BasePage<RegisterController> {
           SizedBox(height: 12.h),
           AppTextFiled(
             controller: controller.usernameController,
-            hintText: "enterYourUserName".tr,
+            hintText: "enterYourUsername".tr,
             isRequired: false,
             textInputAction: TextInputAction.done,
             height: 60.h,
@@ -251,7 +232,7 @@ class RegisterPage extends BasePage<RegisterController> {
             height: 60.h,
             contentPadding:
                 EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
-            hintText: "enterFullName".tr,
+            hintText: "enterYourFullName".tr,
             onChanged: controller.onTextChanged,
             prefixIcon: FittedBox(
               fit: BoxFit.scaleDown,
@@ -311,7 +292,7 @@ class RegisterPage extends BasePage<RegisterController> {
               height: 60.h,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
-              hintText: "enterYourPassword".tr,
+              hintText: "enterYourConfirmPassword".tr,
               onChanged: controller.onTextChanged,
               prefixIcon: FittedBox(
                 fit: BoxFit.scaleDown,

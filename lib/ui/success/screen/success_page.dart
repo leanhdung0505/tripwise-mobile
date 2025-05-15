@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:rive/rive.dart'; // Import thư viện Rive
+import 'package:get/get.dart';
+import 'package:rive/rive.dart'; 
 import 'package:trip_wise_app/common/base/controller/base_page_widget.dart';
 import 'package:trip_wise_app/resource/asset/app_images.dart';
 import 'package:trip_wise_app/ui/success/controller/success_controller.dart';
@@ -34,7 +35,7 @@ class SuccessPage extends BasePage<SuccessController> {
 
             // Title
             Text(
-              "Successful",
+              "successTitle".tr,
               style: AppStyles.STYLE_24_BOLD.copyWith(
                 color: AppColors.color3461FD,
               ),
@@ -43,7 +44,7 @@ class SuccessPage extends BasePage<SuccessController> {
 
             // Subtitle
             Text(
-              "Congratulations! Your password has been changed. Click continue to login",
+              "successDescription".tr,
               textAlign: TextAlign.center,
               style: AppStyles.STYLE_14.copyWith(
                 color: AppColors.color7C8BA0,
@@ -53,7 +54,7 @@ class SuccessPage extends BasePage<SuccessController> {
 
             // Continue Button
             AppButton(
-              text: "Continue",
+              text: "successButton".tr,
               onPressed: controller.onBackToLogin,
               bgColor: AppColors.color3461FD,
               textColor: AppColors.white,

@@ -40,14 +40,14 @@ class ResetPasswordPage extends BasePage<ResetPasswordController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Reset Password',
+                      "resetPasswordTitle".tr, 
                       style: AppStyles.STYLE_32_BOLD.copyWith(
                         color: AppColors.color3461FD,
                       ),
                     ),
                     SizedBox(height: 8.h),
                     Text(
-                      'Please enter your new password and confirm it below.',
+                      "resetPasswordDescription".tr, 
                       style: AppStyles.STYLE_14.copyWith(
                         color: AppColors.color7C8BA0,
                       ),
@@ -57,7 +57,7 @@ class ResetPasswordPage extends BasePage<ResetPasswordController> {
                     SizedBox(height: 32.h),
                     Obx(
                       () => AppButton(
-                        text: 'Submit',
+                        text: "resetPasswordButton".tr, 
                         onPressed: controller.onResetPassword,
                         bgColor: AppColors.color3461FD,
                         height: 60.h,
@@ -111,7 +111,7 @@ class ResetPasswordPage extends BasePage<ResetPasswordController> {
               height: 60.h,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
-              hintText: "Enter your new password",
+              hintText: "resetPasswordDescription".tr, 
               onChanged: controller.onTextChanged,
               prefixIcon: FittedBox(
                 fit: BoxFit.scaleDown,
@@ -150,7 +150,8 @@ class ResetPasswordPage extends BasePage<ResetPasswordController> {
               height: 60.h,
               contentPadding:
                   EdgeInsets.symmetric(vertical: 18.h, horizontal: 24.w),
-              hintText: "Confirm your new password",
+              hintText:
+                  "resetPasswordConfirmPassword".tr, 
               onChanged: controller.onTextChanged,
               prefixIcon: FittedBox(
                 fit: BoxFit.scaleDown,

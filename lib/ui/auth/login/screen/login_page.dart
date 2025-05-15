@@ -22,174 +22,204 @@ class LoginPage extends BasePage<LoginController> {
       },
       child: Scaffold(
         backgroundColor: AppColors.white,
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(24.w),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 60.h),
-              Text(
-                'Sign In',
-                style: AppStyles.STYLE_32_BOLD.copyWith(
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              padding: EdgeInsets.all(24.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 60.h),
+                  Text(
+                    "signIn".tr,
+                    style: AppStyles.STYLE_32_BOLD.copyWith(
+                      color: AppColors.color3461FD,
+                    ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    "signInDescription".tr,
+                    style: AppStyles.STYLE_14.copyWith(
+                      color: AppColors.color7C8BA0,
+                    ),
+                  ),
+                  SizedBox(height: 32.h),
+                  _buildInputSection(),
+                  SizedBox(height: 8.h),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: controller.onNavigateForgotPasswordPage,
+                      child: Text(
+                        "forgotPassword".tr,
+                        style: AppStyles.STYLE_14.copyWith(
+                          color: AppColors.color7C8BA0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 32.h),
+                  Obx(
+                    () => AppButton(
+                      text: "signInButton".tr,
+                      onPressed: controller.isLoading.value
+                          ? null
+                          : controller.onLogin,
+                      bgColor: AppColors.color3461FD,
+                      height: 60.h,
+                      borderRadius: BorderRadius.circular(14.r),
+                      unEnabled: !controller.isLoginButtonEnabled.value,
+                      isLoading: controller.isLoading.value,
+                    ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Divider(
+                          color: AppColors.color7C8BA0.withOpacity(0.3),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Text(
+                          "or".tr,
+                          style: AppStyles.STYLE_14.copyWith(
+                            color: AppColors.color7C8BA0,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(
+                          color: AppColors.color7C8BA0.withOpacity(0.3),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
+                            backgroundColor: AppColors.colorF5F9FE,
+                            side:
+                                const BorderSide(color: AppColors.transparent),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14.r),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: SvgPicture.asset(
+                                  AppImages.icFacebook,
+                                  height: 24.h,
+                                  width: 24.w,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              Text(
+                                'Facebook',
+                                style: AppStyles.STYLE_14.copyWith(
+                                  color: AppColors.color7C8BA0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 16.w),
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(vertical: 12.h),
+                            backgroundColor: AppColors.colorF5F9FE,
+                            side:
+                                const BorderSide(color: AppColors.transparent),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(14.r),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: SvgPicture.asset(
+                                  AppImages.icGoogle,
+                                  height: 24.h,
+                                  width: 24.w,
+                                ),
+                              ),
+                              SizedBox(width: 8.w),
+                              Text(
+                                'Google',
+                                style: AppStyles.STYLE_14.copyWith(
+                                  color: AppColors.color7C8BA0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "don'tHaveAnAccount".tr,
+                        style: AppStyles.STYLE_14.copyWith(
+                          color: AppColors.color7C8BA0,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          controller.onNavigateRegisterPage();
+                        },
+                        child: Text(
+                          "signUpNow".tr,
+                          style: AppStyles.STYLE_16_BOLD.copyWith(
+                            color: AppColors.color3461FD,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 60.h,
+              right: 30.w,
+              child: PopupMenuButton<String>(
+                onSelected: (value) {
+                  controller.changeLanguage(value);
+                },
+                icon: const Icon(
+                  Icons.language,
                   color: AppColors.color3461FD,
                 ),
-              ),
-              SizedBox(height: 8.h),
-              Text(
-                'It was popularised in the 1960s with the release of Letraset sheetscontaining Lorem Ipsum.',
-                style: AppStyles.STYLE_14.copyWith(
-                  color: AppColors.color7C8BA0,
-                ),
-              ),
-              SizedBox(height: 32.h),
-              _buildInputSection(),
-              SizedBox(height: 8.h),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: controller.onNavigateForgotPasswordPage,
-                  child: Text(
-                    'Forgot Password?',
-                    style: AppStyles.STYLE_14.copyWith(
-                      color: AppColors.color7C8BA0,
-                    ),
+                itemBuilder: (context) => [
+                  const PopupMenuItem(
+                    value: 'en',
+                    child: Text('English'),
                   ),
-                ),
-              ),
-              SizedBox(height: 32.h),
-              Obx(
-                () => AppButton(
-                  text: 'Log In',
-                  onPressed:
-                      controller.isLoading.value ? null : controller.onLogin,
-                  bgColor: AppColors.color3461FD,
-                  height: 60.h,
-                  borderRadius: BorderRadius.circular(14.r),
-                  unEnabled: !controller.isLoginButtonEnabled.value,
-                  isLoading: controller.isLoading.value,
-                ),
-              ),
-              SizedBox(height: 24.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                      color: AppColors.color7C8BA0.withOpacity(0.3),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Text(
-                      'Or',
-                      style: AppStyles.STYLE_14.copyWith(
-                        color: AppColors.color7C8BA0,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Divider(
-                      color: AppColors.color7C8BA0.withOpacity(0.3),
-                    ),
+                  const PopupMenuItem(
+                    value: 'vi',
+                    child: Text('Tiếng Việt'),
                   ),
                 ],
               ),
-              SizedBox(height: 24.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 12.h),
-                        backgroundColor: AppColors.colorF5F9FE,
-                        side: const BorderSide(color: AppColors.transparent),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14.r),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: SvgPicture.asset(
-                              AppImages.icFacebook,
-                              height: 24.h,
-                              width: 24.w,
-                            ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            'Facebook',
-                            style: AppStyles.STYLE_14.copyWith(
-                              color: AppColors.color7C8BA0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 16.w),
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 12.h),
-                        backgroundColor: AppColors.colorF5F9FE,
-                        side: const BorderSide(color: AppColors.transparent),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(14.r),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: SvgPicture.asset(
-                              AppImages.icGoogle,
-                              height: 24.h,
-                              width: 24.w,
-                            ),
-                          ),
-                          SizedBox(width: 8.w),
-                          Text(
-                            'Google',
-                            style: AppStyles.STYLE_14.copyWith(
-                              color: AppColors.color7C8BA0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 24.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Don\'t have account? ',
-                    style: AppStyles.STYLE_14.copyWith(
-                      color: AppColors.color7C8BA0,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      controller.onNavigateRegisterPage();
-                    },
-                    child: Text(
-                      'Sign Up',
-                      style: AppStyles.STYLE_16_BOLD.copyWith(
-                        color: AppColors.color3461FD,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

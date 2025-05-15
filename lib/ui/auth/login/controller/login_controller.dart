@@ -51,7 +51,7 @@ class LoginController extends BaseController {
 
   Future<void> onLogin() async {
     if (isLoginButtonEnabled.value) {
-      isLoading.value = true; 
+      isLoading.value = true;
       final request = LoginRequestModel(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
@@ -81,12 +81,17 @@ class LoginController extends BaseController {
 
   void navigateMain() {
     if (isLoginButtonEnabled.value) {
-      Get.toNamed(PageName.mainPage);
+      Get.toNamed(PageName.durationPage);
     }
   }
 
   void onNavigateRegisterPage() {
     Get.toNamed(PageName.requestOtp);
+  }
+
+  void changeLanguage(String languageCode) {
+    Locale locale = Locale(languageCode);
+    Get.updateLocale(locale);
   }
 
   @override

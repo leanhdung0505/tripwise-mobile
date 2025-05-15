@@ -36,7 +36,7 @@ class AppValidator {
     if (value == null || value.isEmpty) {
       return 'requiredPass'.tr;
     }
-    if (value.length < 6) {
+    if (value.length < 8) {
       return 'errorPass'.tr;
     }
     return null;
