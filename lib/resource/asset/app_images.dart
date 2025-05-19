@@ -3,7 +3,7 @@ class AppImages {
   static const assetsImage = 'assets/images/';
 
   static const logo = '${assetsImage}logo_swii.jpg';
-  static const earth = '${assetsImage}earth.png';
+  static const earth = '${assetsImage}earth.jpg';
   static const earthGif = '${assetsImage}earth_gif.png';
 
   static const icUser = '${assetsIcon}ic_user.svg';
@@ -39,6 +39,14 @@ class AppImages {
   static const icEconomy = '${assetsIcon}ic_economy.svg';
   static const icNormal = '${assetsIcon}ic_normal.svg';
   static const icLuxury = '${assetsIcon}ic_luxury.svg';
+  static const icMap = '${assetsIcon}ic_map.svg';
+  static const icDriving = '${assetsIcon}ic_driving.svg';
+  static const icClock = '${assetsIcon}ic_clock.svg';
+  static const icLocationTick = '${assetsIcon}ic_location_tick.svg';
+  static const icRouting = '${assetsIcon}ic_routing.svg';
+  static const icMapOutline = '${assetsIcon}ic_map_outline.svg';
+  static const icArrowCircleRight = '${assetsIcon}ic_arrow_circle_right.svg';
+  static const icMenu = '${assetsIcon}ic_menu.svg';
 
   static const animationCheck = '${assetsIcon}check_animation.riv';
 }

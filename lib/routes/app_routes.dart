@@ -15,6 +15,8 @@ import 'package:trip_wise_app/ui/data-entry/calendar/binding/calendar_binding.da
 import 'package:trip_wise_app/ui/data-entry/calendar/screen/calendar_page.dart';
 import 'package:trip_wise_app/ui/data-entry/interests/binding/interests_binding.dart';
 import 'package:trip_wise_app/ui/data-entry/interests/screen/interests_page.dart';
+import 'package:trip_wise_app/ui/itinerary/binding/itinerary_binding.dart';
+import 'package:trip_wise_app/ui/itinerary/screen/itinerary_page.dart';
 import 'package:trip_wise_app/ui/main/binding/main_binding.dart';
 import 'package:trip_wise_app/ui/main/screen/main_page.dart';
 import 'package:trip_wise_app/ui/splash/binding/splash_binding.dart';
@@ -41,6 +43,7 @@ abstract class PageName {
   static const calendarPage = '/calendar-page';
   static const interestsPage = '/interest-page';
   static const budgetPage = '/budget-page';
+  static const itineraryPage = '/itinerary-page';
 }
 
 abstract class Argument {}
@@ -114,6 +117,11 @@ class AppPages {
       name: PageName.budgetPage,
       page: () => const BudgetPage(),
       binding: BudgetBinding(),
+    ),
+    GetPage(
+      name: PageName.itineraryPage,
+      page: () => const ItineraryPage(),
+      binding: ItineraryBinding(),
     ),
   ];
 }

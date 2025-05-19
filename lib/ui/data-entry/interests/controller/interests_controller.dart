@@ -46,6 +46,9 @@ class InterestsController extends BaseController {
     print("Selected interests: $selectedInterests");
     Get.toNamed(PageName.budgetPage, arguments: {
       'selectedInterests': selectedInterests,
+      'startDate': Get.arguments['startDate'],
+      'endDate': Get.arguments['endDate'],
+      'days': Get.arguments['days'],
     });
   }
 

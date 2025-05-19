@@ -49,7 +49,7 @@ class BudgetPage extends BasePage<BudgetController> {
               Obx(
                 () => AppButton(
                   text: "generate_ai_itinerary".tr,
-                  onPressed: controller.onGenerate,
+                  onPressed: controller.onNavigateItineraryPage,
                   height: 50.h,
                   width: 300.w,
                   borderRadius: BorderRadius.circular(12.r),
