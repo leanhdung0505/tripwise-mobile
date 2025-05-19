@@ -34,6 +34,11 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<BaseResponse> requestOtp({Map<String, dynamic>? body}) {
     return _apiService.postData(endPoint: Endpoint.requestOtp, data: body);
   }
+
+  @override
+  Future<BaseResponse> googleSignIn({Map<String, dynamic>? body}) {
+    return _apiService.postData(endPoint: Endpoint.googleSignIn, data: body);
+  }
 }
 
 class Endpoint {
@@ -43,4 +48,5 @@ class Endpoint {
   static const resetPassword = '/api/v1/password/reset-by-email';
   static const verifyCode = '/api/v1/otp/verify';
   static const requestOtp = '/api/v1/otp/request';
+  static const googleSignIn = '/api/v1/google/login';
 }

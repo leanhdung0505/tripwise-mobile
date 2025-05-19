@@ -2,20 +2,29 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:trip_wise_app/utils/date_time_utils.dart';
 import '../../../../../common/base/widgets/custom_bottom_sheet.dart';
+import '../../../../../common/base/widgets/app_time_picker_modal.dart';
 import '../../../../../data/model/itinerary/activity_model.dart';
 import '../../../../../resource/asset/app_images.dart';
 import '../../../../../resource/theme/app_colors.dart';
 import '../../../../../resource/theme/app_style.dart';
 import '../../../../../routes/app_routes.dart';
 import 'package:get/get.dart';
+import 'package:geolocator/geolocator.dart';
+
+import '../../controller/itinerary_controller.dart';
 
 class ItemActivityWidget extends StatefulWidget {
   final ActivityModel? activity;
   final int? dayNumber;
+  final int? activityIndex;
 
   const ItemActivityWidget(
-      {super.key, required this.activity, required this.dayNumber});
+      {super.key,
+      required this.activity,
+      required this.dayNumber,
+      required this.activityIndex});
 
   @override
   State<ItemActivityWidget> createState() => _ItemActivityWidgetState();
@@ -23,7 +32,7 @@ class ItemActivityWidget extends StatefulWidget {
 
 class _ItemActivityWidgetState extends State<ItemActivityWidget> {
   int _currentIndex = 0;
-
+  final ItineraryController itineraryController = Get.find();
   @override
   Widget build(BuildContext context) {
     final List<String> images = widget.activity?.place?.photos
@@ -116,16 +125,23 @@ class _ItemActivityWidgetState extends State<ItemActivityWidget> {
                           height: 200,
                           width: double.infinity,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+
                             return Container(
                               height: 200,
                               width: double.infinity,
                               color: Colors.grey[300],
                               child: Center(
-                                child: Icon(
-                                  Icons.image_not_supported,
-                                  color: Colors.grey[500],
-                                  size: 50,
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                  color: AppColors.color3461FD,
                                 ),
                               ),
                             );
@@ -217,19 +233,63 @@ class _ItemActivityWidgetState extends State<ItemActivityWidget> {
   }
 
   void _navigateToActivityDetail() {
-    if (widget.activity != null) {
+    if (widget.activity?.place != null) {
       Get.toNamed(
         PageName.activityDetailPage,
         arguments: {
-          'activity': widget.activity,
+          'place': widget.activity?.place,
           'dayNumber': widget.dayNumber,
+          'itineraryId': itineraryController.itineraryId,
+          'dayId': itineraryController
+              .days[itineraryController.selectedDayIndex.value].dayId,
         },
       );
     }
   }
 
-  void _navigateToMap() {
-    if (widget.activity != null) {
+  void _navigateToMap() async {
+    if (widget.activity?.place == null) return;
+
+    try {
+      // Check location permission
+      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        await Geolocator.openLocationSettings();
+        return;
+      }
+
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          return;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        return;
+      }
+
+      // Get current position
+      final position = await Geolocator.getCurrentPosition();
+
+      Get.toNamed(
+        PageName.mapPage,
+        arguments: {
+          'showRoute': true,
+          'startLat': position.latitude,
+          'startLng': position.longitude,
+          'endLat': widget.activity!.place!.latitude,
+          'endLng': widget.activity!.place!.longitude,
+          'activities': [widget.activity],
+          'activityIndex': widget.activityIndex,
+          'showCurrentLocation': true,
+          'dayNumber': widget.dayNumber,
+        },
+      );
+    } catch (e) {
+      debugPrint('Error getting location: $e');
+      // Fallback to just showing the location without route
       Get.toNamed(
         PageName.mapPage,
         arguments: {
@@ -246,7 +306,24 @@ class _ItemActivityWidgetState extends State<ItemActivityWidget> {
         title: 'changeTimeDayActivity'.tr,
         iconPath: AppImages.icClock,
         iconColor: AppColors.color0C092A,
-        onTap: () {},
+        onTap: () async {
+          DateTime? initialTime;
+          try {
+            if (widget.activity?.startTime != null) {
+              initialTime = DateTime.tryParse(widget.activity!.startTime!);
+            }
+          } catch (e) {
+            debugPrint('Error parsing time: $e');
+          }
+
+          final selectedTime = await AppTimePickerModal.show(
+            context: context,
+            title: 'selectTime'.tr,
+            initialTime: initialTime ?? DateTime.now(),
+          );
+          // ignore: use_build_context_synchronously
+          _showChangeTimeConfirmation(context, selectedTime!);
+        },
       ),
       MenuOption(
         title: 'detail'.tr,
@@ -267,7 +344,6 @@ class _ItemActivityWidgetState extends State<ItemActivityWidget> {
     ];
     context.showMenuBottomSheet(
       options: menuOptions,
-      // title: 'planOptions'.tr, // Optional title
     );
   }
 
@@ -282,9 +358,8 @@ class _ItemActivityWidgetState extends State<ItemActivityWidget> {
       btnCancelText: 'cancel'.tr,
       btnCancelColor: AppColors.color7C8BA0,
       btnOkColor: AppColors.errorColor,
-      btnOkOnPress: () {
-        // controller.deletePlan();
-      },
+      btnOkOnPress: () => itineraryController
+          .deleteActivity(widget.activity!.itineraryActivityId!),
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -298,6 +373,47 @@ class _ItemActivityWidgetState extends State<ItemActivityWidget> {
           const SizedBox(height: 10),
           Text(
             'confirmDeleteActivity'.tr,
+            textAlign: TextAlign.center,
+            style: AppStyles.STYLE_16.copyWith(
+              color: AppColors.color0C092A,
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    ).show();
+  }
+
+  void _showChangeTimeConfirmation(
+      BuildContext context, DateTime? selectedTime) {
+    final String newTime = selectedTime!.formatTime().toString();
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.question,
+      animType: AnimType.bottomSlide,
+      dialogBackgroundColor: AppColors.white,
+      btnCancelOnPress: () {},
+      btnOkText: 'changeTime'.tr,
+      btnCancelText: 'cancel'.tr,
+      btnCancelColor: AppColors.color7C8BA0,
+      btnOkColor: AppColors.color3461FD,
+      btnOkOnPress: () => itineraryController.changeTimeActivity(
+        widget.activity!.itineraryActivityId!,
+        newTime,
+      ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'confirmChange'.tr,
+            style: AppStyles.STYLE_20.copyWith(
+              color: AppColors.color3461FD,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            'confirmChangeTime'.tr,
             textAlign: TextAlign.center,
             style: AppStyles.STYLE_16.copyWith(
               color: AppColors.color0C092A,

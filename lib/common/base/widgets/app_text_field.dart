@@ -25,6 +25,7 @@ class AppTextFiled extends StatelessWidget {
   final bool? isReadOnly;
   final Function()? onTap;
   final double? height; // New parameter for text field height
+  final Color? focusedBorderColor;
 
   const AppTextFiled({
     super.key,
@@ -47,6 +48,7 @@ class AppTextFiled extends StatelessWidget {
     this.onTap,
     this.isReadOnly,
     this.height, // Added to constructor
+    this.focusedBorderColor,
   });
 
   @override
@@ -55,7 +57,7 @@ class AppTextFiled extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (labelText!=null && labelText!.isNotEmpty)
+        if (labelText != null && labelText!.isNotEmpty)
           RichText(
             text: TextSpan(
               children: [
@@ -63,9 +65,8 @@ class AppTextFiled extends StatelessWidget {
                   text: labelText.nullToEmpty,
                   style: labelStyle ??
                       AppStyles.STYLE_14.copyWith(
-                        color: AppColors.color7C8BA0,
-                        fontWeight: FontWeight.w600
-                      ),
+                          color: AppColors.color7C8BA0,
+                          fontWeight: FontWeight.w600),
                 ),
                 TextSpan(
                   text:
@@ -86,7 +87,7 @@ class AppTextFiled extends StatelessWidget {
           textInputAction: textInputAction,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: validator,
-          onChanged: onChanged, 
+          onChanged: onChanged,
           cursorColor: AppColors.color262626,
           style: AppStyles.STYLE_14.copyWith(color: AppColors.color262626),
           readOnly: isReadOnly ?? false,
@@ -100,9 +101,13 @@ class AppTextFiled extends StatelessWidget {
             suffixIcon: suffixIcon,
             prefixIcon: prefixIcon,
             // Here's the important part - set consistent padding
-            contentPadding: contentPadding ?? EdgeInsets.symmetric(vertical: height != null ? height! / 2 - 10 : 15, horizontal: 12),
+            contentPadding: contentPadding ??
+                EdgeInsets.symmetric(
+                    vertical: height != null ? height! / 2 - 10 : 15,
+                    horizontal: 12),
             enabledBorder: _buildOutlineInputBorder(AppColors.transparent),
-            focusedBorder: _buildOutlineInputBorder(AppColors.color3461FD),
+            focusedBorder: _buildOutlineInputBorder(
+                focusedBorderColor ?? AppColors.color3461FD),
             errorBorder: _buildOutlineInputBorder(AppColors.errorColor),
             focusedErrorBorder: _buildOutlineInputBorder(AppColors.errorColor),
             fillColor: fillColor ?? AppColors.colorF5F9FE,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../user/user_minimal_model.dart';
 import 'day_model.dart';
 import 'hotel_model.dart';
 
@@ -19,6 +20,8 @@ class ItineraryModel {
   String? updatedAt;
   HotelModel? hotel;
   List<DayModel>? days;
+  List<UserMinimalModel>? sharedUsers;
+  UserMinimalModel? owner;
 
   ItineraryModel({
     this.title,
@@ -36,6 +39,8 @@ class ItineraryModel {
     this.updatedAt,
     this.hotel,
     this.days,
+    this.sharedUsers,
+    this.owner,
   });
 
   ItineraryModel.fromJson(Map<String, dynamic> json) {
@@ -55,6 +60,14 @@ class ItineraryModel {
     hotel = json['hotel'] != null ? HotelModel.fromJson(json['hotel']) : null;
     days = json['days'] != null
         ? (json['days'] as List).map((e) => DayModel.fromJson(e)).toList()
+        : null;
+    sharedUsers = json['shared_users'] != null
+        ? (json['shared_users'] as List)
+            .map((e) => UserMinimalModel.fromJson(e))
+            .toList()
+        : null;
+    owner = json['owner'] != null
+        ? UserMinimalModel.fromJson(json['owner'])
         : null;
   }
 
@@ -78,6 +91,12 @@ class ItineraryModel {
     }
     if (days != null) {
       data['days'] = days!.map((e) => e.toJson()).toList();
+    }
+    if (sharedUsers != null) {
+      data['shared_users'] = sharedUsers!.map((e) => e.toJson()).toList();
+    }
+    if (owner != null) {
+      data['owner'] = owner?.toJson();
     }
     return data;
   }

@@ -14,6 +14,7 @@ class AppStyles {
   static const double FONT_SIZE_20 = 20.0;
   static const double FONT_SIZE_24 = 24.0;
 
+  static const double FONT_SIZE_14_BOLD = 14.0;
   static const double FONT_SIZE_16_BOLD = 16.0;
   static const double FONT_SIZE_18_BOLD = 18.0;
   static const double FONT_SIZE_20_BOLD = 20.0;
@@ -69,6 +70,12 @@ class AppStyles {
   static const TextStyle STYLE_10_BOLD = TextStyle(
     fontFamily: FONT_FAMILY_SF_PRO,
     fontSize: FONT_SIZE_10,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle STYLE_14_BOLD = TextStyle(
+    fontFamily: FONT_FAMILY_SF_PRO,
+    fontSize: FONT_SIZE_14_BOLD,
     fontWeight: FontWeight.bold,
   );
 

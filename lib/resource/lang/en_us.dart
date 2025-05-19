@@ -13,6 +13,13 @@ const Map<String, String> enUS = {
   "didNotGetOtp": "Did not get OTP? ",
   "loading": "Loading...",
   "vietNam": "Viet Nam",
+  "errorOccurred": "An error occurred",
+  "activityAddedToItinerary": "Activity added to itinerary successfully",
+  "home": "Home",
+  "share": "Share",
+  "favorite": "Favorite",
+  "profile": "Profile",
+  "trips": "Trips",
 
   //Error
   "thisFieldIsRequired": "This field is required",
@@ -33,6 +40,7 @@ const Map<String, String> enUS = {
   "or": "Or",
   "don'tHaveAnAccount": "Don't have an account?",
   "signUpNow": "Sign Up",
+  "loginSuccess": "Login Success",
 
   //Sign Up
   "signUp": "Sign Up",
@@ -42,6 +50,7 @@ const Map<String, String> enUS = {
   "confirmPassword": "Confirm Password",
   "signUpButton": "Create Account",
   "doYouHaveAnAccount": "Do you have an account?",
+  "registerSuccess": "Register Success",
 
   //Forgot Password
   "forgotPasswordTitle": "Forgot Password",
@@ -127,7 +136,39 @@ const Map<String, String> enUS = {
   "changeTimeDayActivity": "Change time of activity",
   "detail": "Detail",
   "deleteActivity": "Delete activity",
-
+  "noActivities": "No activities for Day @day",
+  "noDaySelected": "No day selected",
+  "confirmDeleteDay": "Confirm Delete Day",
+  "confirmDeleteDayMessage": "Are you sure you want to delete this day?",
+  "deleteDay": "Delete Day",
+  "selectTime": "Select Time",
+  "done": "Done",
+  "hotel": "Hotel",
+  "timeUpdatedSuccess": "Time of activity has been updated successfully",
+  "confirmChange": "Confirm Change",
+  "confirmChangeTime":
+      "Are you sure you want to change the time of this activity?",
+  "changeTime": "Change",
+  "addNewRestaurant": "Add New Restaurant",
+  "addNewAttraction": "Add New Attraction",
+  "restaurant": "Restaurant",
+  "attraction": "Attraction",
+  "daNangVietnam": "Da Nang, Viet Nam",
+  "noResult": "No result found",
+  "moreDetails": "More Details",
+  "addDay": "Add Day",
+  "selectDay": "Select Day",
+  "addDaySuccess": "Day has been added successfully",
+  "direction": "Direction",
+  "searchUsers": "Search Users",
+  "shareSuccess": "Itinerary has been shared successfully",
+  "viewOnly": "View Only",
+  "editAccess": "Edit",
+  "close": "Close",
+  "sharedUsers": "Shared Users",
+  "saveChanges": "Save Changes",
+  "updatePermissionsSuccess": "Permissions updated successfully",
+  
   //Activity Detail
   "contactInformation": "Contact Information",
   "about": "About",
@@ -145,4 +186,22 @@ const Map<String, String> enUS = {
   "defaultHotelDesc":
       "Comfortable accommodation with excellent facilities and services.",
   "defaultPlaceDesc": "A wonderful place to visit with unique experiences.",
+
+  //Home
+  "seeYourPlan": "See Your Plan",
+  "noTripsYet": "No trips yet",
+  "pullToRefresh": "Pull to refresh",
+
+  //Process Loading
+  "generateAiItinerary": "Generate AI Itinerary",
+  "generateAiItineraryDescription":
+      "Simply enter your destination, travel dates, and personal preferences — our AI will instantly create a customized, optimized travel itinerary just for you. From attractions and restaurants to budget-friendly activities, everything is planned efficiently in seconds. Explore the world smarter and easier than ever before!",
+  "generateAiItineraryFooter": "Generating itinerary...",
+
+  //Setting
+  "setting": "Setting",
+  "logout": "Logout",
+  "myAccount": "My Account",
+  "language": "Language",
+  
 };

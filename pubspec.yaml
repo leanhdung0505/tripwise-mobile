@@ -47,6 +47,7 @@ dependencies:
   intl: ^0.19.0
   flutter_screenutil: ^5.9.0
   shared_preferences: ^2.3.2
+  percent_indicator: ^4.2.3
 
   flutter_svg: ^2.0.13
   path_provider: ^2.1.5
@@ -65,13 +66,15 @@ dependencies:
   rive: ^0.13.20
   calendar_date_picker2: ^1.1.8
   shimmer: ^3.0.0
-  google_maps_flutter: ^2.10.1
-  flutter_polyline_points: ^2.1.0
+  google_maps_flutter: ^2.5.3
+  flutter_polyline_points: ^2.0.0
   carousel_slider: ^5.0.0
   awesome_dialog: ^3.2.1
   url_launcher: ^6.2.5
   geolocator: ^13.0.2
-  
+  google_sign_in: ^6.2.2
+  http: ^1.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
