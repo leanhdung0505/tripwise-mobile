@@ -33,6 +33,7 @@ class CalendarController extends BaseController {
 
   void onNext() {
     Get.toNamed(PageName.interestsPage, arguments: {
+      'days': Get.arguments['days'] + 1,
       'startDate': startDate.value,
       'endDate': endDate.value,
     });

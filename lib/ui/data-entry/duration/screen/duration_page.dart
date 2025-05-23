@@ -45,7 +45,7 @@ class DurationPage extends BasePage<DurationController> {
               const Spacer(),
               Obx(
                 () => AppButton(
-                  text: "Next",
+                  text: "next".tr,
                   onPressed: controller.onNext,
                   bgColor: AppColors.color3461FD,
                   textColor: AppColors.white,

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:trip_wise_app/common/base/controller/base_controller.dart';
 import 'package:trip_wise_app/ui/data-entry/budget/model/list_budget.dart';
 
+import '../../../../routes/app_routes.dart';
 import '../model/budget_model.dart';
 
 class BudgetController extends BaseController {
@@ -27,6 +28,15 @@ class BudgetController extends BaseController {
 
   void checkStatus() {
     isEnabledButton.value = selectedBudget.value.isNotEmpty;
+  }
+
+  void onNavigateItineraryPage() {
+    if (isEnabledButton.value) {
+      Get.toNamed(PageName.itineraryPage, arguments: {
+        'startDate': Get.arguments['startDate'],
+        'endDate': Get.arguments['endDate'],
+      });
+    }
   }
 
   void onGenerate() {
