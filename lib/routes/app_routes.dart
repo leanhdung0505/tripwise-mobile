@@ -15,8 +15,10 @@ import 'package:trip_wise_app/ui/data-entry/calendar/binding/calendar_binding.da
 import 'package:trip_wise_app/ui/data-entry/calendar/screen/calendar_page.dart';
 import 'package:trip_wise_app/ui/data-entry/interests/binding/interests_binding.dart';
 import 'package:trip_wise_app/ui/data-entry/interests/screen/interests_page.dart';
-import 'package:trip_wise_app/ui/itinerary/binding/itinerary_binding.dart';
-import 'package:trip_wise_app/ui/itinerary/screen/itinerary_page.dart';
+import 'package:trip_wise_app/ui/plan/activity_detail/binding/activity_detail_binding.dart';
+import 'package:trip_wise_app/ui/plan/activity_detail/screen/activity_detail_page.dart';
+import 'package:trip_wise_app/ui/plan/itinerary/binding/itinerary_binding.dart';
+import 'package:trip_wise_app/ui/plan/itinerary/screen/itinerary_page.dart';
 import 'package:trip_wise_app/ui/main/binding/main_binding.dart';
 import 'package:trip_wise_app/ui/main/screen/main_page.dart';
 import 'package:trip_wise_app/ui/splash/binding/splash_binding.dart';
@@ -25,6 +27,8 @@ import '../ui/auth/reset-password/binding/reset_password_binding.dart';
 import '../ui/auth/reset-password/screen/reset_password_page.dart';
 import '../ui/data-entry/duration/binding/duration_binding.dart';
 import '../ui/data-entry/duration/screen/duration_page.dart';
+import '../ui/plan/map/binding/map_binding.dart';
+import '../ui/plan/map/screen/map_page.dart';
 import '../ui/splash/screen/splash_page.dart';
 import '../ui/success/binding/success_binding.dart';
 import '../ui/success/screen/success_page.dart';
@@ -44,12 +48,15 @@ abstract class PageName {
   static const interestsPage = '/interest-page';
   static const budgetPage = '/budget-page';
   static const itineraryPage = '/itinerary-page';
+  static const mapPage = '/map-page';
+  static const activityDetailPage = '/activity-detail-page';
 }
 
 abstract class Argument {}
 
 class AppPages {
-  static const String initialRoute = PageName.splashPage; // Define initial route
+  static const String initialRoute =
+      PageName.splashPage; // Define initial route
   static final routes = [
     GetPage(
       name: PageName.splashPage,
@@ -80,8 +87,7 @@ class AppPages {
       name: PageName.resetPasswordPage,
       page: () => const ResetPasswordPage(),
       binding: ResetPasswordBinding(),
-      transitionDuration: 500.milliseconds, 
-
+      transitionDuration: 500.milliseconds,
     ),
     GetPage(
       name: PageName.verifyCodePage,
@@ -122,6 +128,16 @@ class AppPages {
       name: PageName.itineraryPage,
       page: () => const ItineraryPage(),
       binding: ItineraryBinding(),
+    ),
+    GetPage(
+      name: PageName.mapPage,
+      page: () => const MapPage(),
+      binding: MapBinding(),
+    ),
+    GetPage(
+      name: PageName.activityDetailPage,
+      page: () => const ActivityDetailPage(),
+      binding: ActivityDetailBinding(),
     ),
   ];
 }

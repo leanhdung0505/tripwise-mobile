@@ -47,6 +47,9 @@ class AppImages {
   static const icMapOutline = '${assetsIcon}ic_map_outline.svg';
   static const icArrowCircleRight = '${assetsIcon}ic_arrow_circle_right.svg';
   static const icMenu = '${assetsIcon}ic_menu.svg';
-
+  static const icDelete = '${assetsIcon}ic_delete.svg';
+  static const icShare = '${assetsIcon}ic_share.svg'; 
+  static const icMoreCircle = '${assetsIcon}ic_more_circle.svg';
+  static const icEdit = '${assetsIcon}ic_edit.svg';
   static const animationCheck = '${assetsIcon}check_animation.riv';
 }

@@ -12,18 +12,20 @@ const Map<String, String> viVN = {
   "step": "Bước @step",
   "didNotGetOtp": "Bạn chưa nhận được mã xác thực? ",
   "loading": "Đang tải...",
-  
+  "vietNam": "Việt Nam",
+
   //Error
-  "thisFieldIsRequired":"Trường này là bắt buộc",
-  "requiredPass" : "Vui lòng nhập mật khẩu",
-  "requiredEmail" : "Vui lòng nhập email",
-  "errorEmail" : "Email không hợp lệ",
-  "errorPass" : "Mật khẩu phải có ít nhất 8 ký tự",
-  "passwordNotMatch" : "Mật khẩu không khớp",
+  "thisFieldIsRequired": "Trường này là bắt buộc",
+  "requiredPass": "Vui lòng nhập mật khẩu",
+  "requiredEmail": "Vui lòng nhập email",
+  "errorEmail": "Email không hợp lệ",
+  "errorPass": "Mật khẩu phải có ít nhất 8 ký tự",
+  "passwordNotMatch": "Mật khẩu không khớp",
 
   //Sign In
   "signIn": "Đăng nhập",
-  "signInDescription": "Nhập email và mật khẩu của bạn để đăng nhập vào tài khoản của bạn ",
+  "signInDescription":
+      "Nhập email và mật khẩu của bạn để đăng nhập vào tài khoản của bạn ",
   "email": "Email",
   "password": "Mật khẩu",
   "forgotPassword": "Quên mật khẩu?",
@@ -31,7 +33,7 @@ const Map<String, String> viVN = {
   "or": "Hoặc",
   "don'tHaveAnAccount": "Bạn chưa có tài khoản?",
   "signUpNow": "Đăng ký ngay",
-   
+
   //Sign Up
   "signUp": "Đăng ký",
   "signUpDescription": "Tạo tài khoản để bắt đầu",
@@ -40,18 +42,19 @@ const Map<String, String> viVN = {
   "confirmPassword": "Xác nhận mật khẩu",
   "signUpButton": "Tạo tài khoản",
   "doYouHaveAnAccount": "Bạn đã có tài khoản?",
-   
+
   //Forgot Password
   "forgotPasswordTitle": "Quên mật khẩu",
   "forgotPasswordDescription": "Nhập email của bạn để đặt lại mật khẩu",
-   
+
   //Request OTP
   "requestOtpTitle": "Yêu cầu mã xác thực",
   "requestOtpDescription": "Nhập email của bạn để nhận mã xác thực",
-    
+
   //Verify Code
   "verifyCodeTitle": "Xác thực mã",
-  "verifyCodeDescription": "Chúng tôi đã gửi một liên kết đặt lại để nhập mã 5 chữ số mà đã đề cập trong email ",
+  "verifyCodeDescription":
+      "Chúng tôi đã gửi một liên kết đặt lại để nhập mã 5 chữ số mà đã đề cập trong email ",
   "verifyCodeButton": "Xác thực",
 
   //Reset Password
@@ -63,15 +66,17 @@ const Map<String, String> viVN = {
   //Duration
   "durationTitle": "Thời gian du lịch",
   "durationDescription": "Nhập số ngày cho chuyến đi",
-  "day" : "@day ngày",
+  "day": "@day ngày",
 
   //Calendar
   "calendarTitle": "Lịch trình",
-  "calendarDescription": "Chọn ngày bắt đầu và ngày kết thúc cho chuyến đi của bạn",
-  
+  "calendarDescription":
+      "Chọn ngày bắt đầu và ngày kết thúc cho chuyến đi của bạn",
+
   //Interests
   "interestsTitle": "Sở thích của bạn",
-  "interestsDescription": "Chọn sở thích của bạn để nhận được những gợi ý tốt nhất",
+  "interestsDescription":
+      "Chọn sở thích của bạn để nhận được những gợi ý tốt nhất",
   "interestsButton": "Tiếp theo",
   "beach": "Bãi biển",
   "museum": "Bảo tàng",
@@ -85,17 +90,60 @@ const Map<String, String> viVN = {
   "historical": "Lịch sử",
   "nature": "Thiên nhiên",
   "sightseeing": "Tham quan",
-  
+
   //Budget
   "budgetTitle": "Ngân sách",
-  "budgetDescription": "Chọn loại ngân sách bạn muốn. Điều này giúp chúng tôi đề xuất chỗ ở, hoạt động và trải nghiệm phù hợp với phạm vi chi tiêu mong muốn của bạn",
-  "generate_ai_itinerary" : "Tạo lịch trình AI",
-  "economy" : "Tiết kiệm",
-  "normal" : "Bình thường",
-  "luxury" : "Sang trọng",
+  "budgetDescription":
+      "Chọn loại ngân sách bạn muốn. Điều này giúp chúng tôi đề xuất chỗ ở, hoạt động và trải nghiệm phù hợp với phạm vi chi tiêu mong muốn của bạn",
+  "generate_ai_itinerary": "Tạo lịch trình AI",
+  "economy": "Tiết kiệm",
+  "normal": "Bình thường",
+  "luxury": "Sang trọng",
 
   //Success
   "successTitle": "Thành công",
   "successDescription": "Mật khẩu của bạn đã được đặt lại thành công",
   "successButton": "Tiếp tục",
+
+  //Itinerary
+  "days": "Ngày @day",
+  "reviews": "@review đánh giá",
+  "monday": "Thứ hai",
+  "tuesday": "Thứ ba",
+  "wednesday": "Thứ tư",
+  "thursday": "Thứ năm",
+  "friday": "Thứ 6",
+  "saturday": "Thứ 7",
+  "sunday": "Chủ nhật",
+  "minute": "@minute ph",
+  "hour": "@hour g @minute ph",
+  "editPlan": "Chỉnh sửa kế hoạch",
+  "deletePlan": "Xóa kế hoạch",
+  "sharePlan": "Chia sẻ kế hoạch",
+  "confirmDelete": "Xác nhận xóa",
+  "confirmDeleteMessage": "Bạn có chắc chắn muốn xóa kế hoạch này không?",
+  "confirmDeleteActivity": "Bạn có chắc chắn muốn xóa hoạt động này không?",
+  "delete": "Xóa",
+  "cancel": "Hủy",
+  "changeTimeDayActivity": "Thay đổi thời gian hoạt động",
+  "detail": "Chi tiết hoạt động",
+  "deleteActivity": "Xóa hoạt động",
+
+  //Activity Detail
+  "contactInformation": "Thông tin liên hệ",
+  "about": "Giới thiệu",
+  "restaurantDetails": "Chi tiết nhà hàng",
+  "attractionDetails": "Chi tiết điểm tham quan",
+  "mealTypes": "Loại bữa ăn",
+  "categories": "Danh mục",
+  "types": "Loại hình",
+  "viewMoreOnWebsite": "Xem thêm trên website",
+  "noWebsiteAvailable": "Không có website",
+  "defaultRestaurantDesc":
+      "Một trải nghiệm ẩm thực tuyệt vời đang chờ bạn tại nhà hàng này.",
+  "defaultAttractionDesc":
+      "Một điểm tham quan tuyệt vời với nhiều trải nghiệm độc đáo và đáng nhớ.",
+  "defaultHotelDesc": "Chỗ ở thoải mái với tiện nghi và dịch vụ tuyệt vời.",
+  "defaultPlaceDesc":
+      "Một địa điểm tuyệt vời để tham quan với nhiều trải nghiệm độc đáo.",
 };
