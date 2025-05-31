@@ -5,6 +5,7 @@ class AppImages {
   static const logo = '${assetsImage}logo_swii.jpg';
   static const earth = '${assetsImage}earth.jpg';
   static const earthGif = '${assetsImage}earth_gif.png';
+  static const imageUserDefault = '${assetsImage}image_user_default.jpg';
 
   static const icUser = '${assetsIcon}ic_user.svg';
   static const icKey = '${assetsIcon}ic_key.svg';
@@ -48,8 +49,20 @@ class AppImages {
   static const icArrowCircleRight = '${assetsIcon}ic_arrow_circle_right.svg';
   static const icMenu = '${assetsIcon}ic_menu.svg';
   static const icDelete = '${assetsIcon}ic_delete.svg';
-  static const icShare = '${assetsIcon}ic_share.svg'; 
+  static const icShare = '${assetsIcon}ic_share.svg';
   static const icMoreCircle = '${assetsIcon}ic_more_circle.svg';
   static const icEdit = '${assetsIcon}ic_edit.svg';
   static const animationCheck = '${assetsIcon}check_animation.riv';
+  static const icRestaurant = '${assetsIcon}ic_restaurant.svg';
+  static const icActivity = '${assetsIcon}ic_activity.svg';
+  static const icSearch = '${assetsIcon}ic_search.svg';
+  static const icAddCalendar = '${assetsIcon}ic_add_calendar.svg';
+  static const icProfileOn = '${assetsIcon}ic_profile_on.svg';
+  static const icTravel = '${assetsIcon}ic_travel.svg';
+  static const icLovely = '${assetsIcon}ic_lovely.svg';
+  static const icPersonAdd = '${assetsIcon}ic_person_add.svg';
+  static const travelAppAnimation = '${assetsIcon}travel_app_animation.riv';
+  static const icProfileCircle = '${assetsIcon}ic_profile_circle.svg';
+  static const icTranslate = '${assetsIcon}ic_translate.svg';
+  static const icLogout = '${assetsIcon}ic_logout.svg';
 }

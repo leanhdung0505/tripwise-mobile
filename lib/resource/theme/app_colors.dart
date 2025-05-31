@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class AppColors {
@@ -23,8 +22,10 @@ class AppColors {
   static const Color color0AE4E4 = Color(0xFF0AE4E4);
   static const Color colorE4CB0A = Color(0xFFE4CB0A);
   static const Color color4285F4 = Color(0xFF4285F4);
-  static const Color colorFF8C00 = Color(0xFFFF8C00); 
+  static const Color colorFF8C00 = Color(0xFFFF8C00);
   static const Color color34D8FD = Color(0xFF34D8FD);
+  static const Color colorFF9C41 = Color(0xFFFF9C41);
+  static const Color colorFF4D4D = Color(0xFFFF4D4D);
 }
 
 ColorFilter greyFilter = const ColorFilter.matrix(<double>[
@@ -51,10 +52,12 @@ ColorFilter greyFilter = const ColorFilter.matrix(<double>[
 ]);
 
 Color hexToColor(String hex) {
-  assert(RegExp(r'^#([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$').hasMatch(hex), 'hex color must be #rrggbb or #rrggbbaa');
+  assert(RegExp(r'^#([0-9a-fA-F]{6})|([0-9a-fA-F]{8})$').hasMatch(hex),
+      'hex color must be #rrggbb or #rrggbbaa');
 
   return Color(
-    int.parse(hex.substring(1), radix: 16) + (hex.length == 7 ? 0xff000000 : 0x00000000),
+    int.parse(hex.substring(1), radix: 16) +
+        (hex.length == 7 ? 0xff000000 : 0x00000000),
   );
 }
 
@@ -89,7 +92,8 @@ extension ColorExt on Color {
     assert(amount >= 0 && amount <= 1);
 
     final hsl = HSLColor.fromColor(this);
-    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+    final hslLight =
+        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
 
     return hslLight.toColor();
   }

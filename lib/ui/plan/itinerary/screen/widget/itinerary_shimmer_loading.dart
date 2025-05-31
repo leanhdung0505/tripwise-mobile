@@ -34,7 +34,7 @@ class ItineraryShimmerLoading extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.symmetric(horizontal: 24.w),
               alignment: Alignment.bottomCenter,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.transparent,
               ),
               child: Row(

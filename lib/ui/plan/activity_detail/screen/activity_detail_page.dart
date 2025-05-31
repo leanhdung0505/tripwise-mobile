@@ -8,6 +8,8 @@ import 'package:trip_wise_app/resource/theme/app_colors.dart';
 import 'package:trip_wise_app/resource/theme/app_style.dart';
 import 'package:trip_wise_app/ui/plan/activity_detail/controller/activity_detail_controller.dart';
 
+import '../../../../common/base/widgets/app_time_picker_modal.dart';
+
 class ActivityDetailPage extends BasePage<ActivityDetailController> {
   const ActivityDetailPage({super.key});
 
@@ -16,7 +18,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Obx(() {
-        if (controller.activity.value == null) {
+        if (controller.place.value == null) {
           return const Center(
             child: CircularProgressIndicator(),
           );
@@ -26,7 +28,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
           slivers: [
             _buildSliverAppBar(),
             SliverToBoxAdapter(
-              child: _buildContent(),
+              child: _buildContent(context),
             ),
           ],
         );
@@ -182,13 +184,13 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
     );
   }
 
-  Widget _buildContent() {
+  Widget _buildContent(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildPlaceInfo(),
+          _buildPlaceInfo(context),
           SizedBox(height: 20.h),
           _buildRatingSection(),
           SizedBox(height: 20.h),
@@ -205,17 +207,53 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
     );
   }
 
-  Widget _buildPlaceInfo() {
+  Widget _buildPlaceInfo(BuildContext context) {
     return Obx(
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            controller.placeName,
-            style: AppStyles.STYLE_20_BOLD.copyWith(
-              color: AppColors.color0C092A,
-              fontSize: 24.sp,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 300.w,
+                child: Text(
+                  controller.placeName,
+                  style: AppStyles.STYLE_20_BOLD.copyWith(
+                    color: AppColors.color0C092A,
+                    fontSize: 24.sp,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ),
+              controller.dayNumber == -1
+                  ? InkWell(
+                      onTap: () async {
+                        final selectedTime = await AppTimePickerModal.show(
+                          context: context,
+                          title: 'selectTime'.tr,
+                          initialTime: DateTime.now(),
+                        );
+                        controller.addActivityToItinerary(
+                            controller.place.value!, selectedTime!);
+                      },
+                      child: Container(
+                        width: 45.w,
+                        height: 45.w,
+                        decoration: const BoxDecoration(
+                          color: AppColors.color3461FD,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.add,
+                          color: AppColors.white,
+                          size: 26.w,
+                        ),
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ],
           ),
           SizedBox(height: 8.h),
           Row(
@@ -228,7 +266,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
               SizedBox(width: 7.w),
               Expanded(
                 child: Text(
-                  controller.activity.value?.place?.address ?? '',
+                  controller.place.value?.address ?? '',
                   style: AppStyles.STYLE_14.copyWith(
                     color: AppColors.color7C8BA0,
                   ),
@@ -236,8 +274,8 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
               ),
             ],
           ),
-          if (controller.activity.value?.place?.priceRange != null &&
-              controller.activity.value!.place!.priceRange!.isNotEmpty) ...[
+          if (controller.place.value?.priceRange != null &&
+              controller.place.value!.priceRange!.isNotEmpty) ...[
             SizedBox(height: 8.h),
             Row(
               children: [
@@ -248,7 +286,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
                 ),
                 SizedBox(width: 4.w),
                 Text(
-                  controller.activity.value!.place!.priceRange!,
+                  controller.place.value!.priceRange!,
                   style: AppStyles.STYLE_14.copyWith(
                       color: AppColors.color0C092A,
                       fontWeight: FontWeight.w700),
@@ -302,7 +340,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
 
   Widget _buildContactInfo() {
     return Obx(() {
-      final place = controller.activity.value?.place;
+      final place = controller.place.value;
       if (place == null) return const SizedBox.shrink();
 
       final hasContactInfo = (place.phone != null && place.phone!.isNotEmpty) ||
@@ -388,7 +426,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
 
   Widget _buildPlaceDetails() {
     return Obx(() {
-      final place = controller.activity.value?.place;
+      final place = controller.place.value;
       if (place == null) return const SizedBox.shrink();
 
       if (place.isRestaurant && place.restaurantDetail != null) {
@@ -535,7 +573,7 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
 
   Widget _buildWebsiteButton() {
     return Obx(() {
-      final place = controller.activity.value?.place;
+      final place = controller.place.value;
       final hasWebsite = place?.website != null && place!.website!.isNotEmpty;
       final hasWebUrl = place?.webUrl != null && place!.webUrl!.isNotEmpty;
 

@@ -1,28 +1,35 @@
 import 'package:get/get.dart';
+import 'package:trip_wise_app/utils/date_time_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../common/base/controller/base_controller.dart';
+import '../../../../common/base/controller/observer_func.dart';
+import '../../../../common/repository/itinerary_repository.dart';
+import '../../../../common/repository/itinerary_repository_impl.dart';
 import '../../../../data/model/itinerary/activity_model.dart';
+import '../../../../data/model/itinerary/place_model.dart';
 import '../../../../routes/app_routes.dart';
 
 class ActivityDetailController extends BaseController {
   static ActivityDetailController get to =>
       Get.find<ActivityDetailController>();
 
-  Rxn<ActivityModel> activity = Rxn<ActivityModel>();
+  Rxn<PlaceModel> place = Rxn<PlaceModel>();
   RxInt currentImageIndex = 0.obs;
   RxList<String> images = <String>[].obs;
   int? dayNumber;
-
+  final ItineraryRepository _itineraryRepository = ItineraryRepositoryImpl();
+  int itineraryId = Get.arguments["itineraryId"];
+  int dayId = Get.arguments["dayId"];
   @override
   void onInit() {
     super.onInit();
-    _initializeActivity();
+    _initializePlace();
   }
 
-  void _initializeActivity() {
+  void _initializePlace() {
     final arguments = Get.arguments;
-    if (arguments != null && arguments['activity'] != null) {
-      activity.value = arguments['activity'] as ActivityModel;
+    if (arguments != null && arguments['place'] != null) {
+      place.value = arguments['place'] as PlaceModel;
       dayNumber = arguments['dayNumber'] as int?;
 
       _setupImages();
@@ -30,34 +37,32 @@ class ActivityDetailController extends BaseController {
   }
 
   void _setupImages() {
-    final List<String> activityImages = [];
+    final List<String> placeImages = [];
 
     // Add main image if available
-    if (activity.value?.place?.image != null &&
-        activity.value!.place!.image!.isNotEmpty) {
-      activityImages.add(activity.value!.place!.image!);
+    if (place.value?.image != null && place.value!.image!.isNotEmpty) {
+      placeImages.add(place.value!.image!);
     }
 
     // Add photos if available
-    if (activity.value?.place?.photos != null &&
-        activity.value!.place!.photos!.isNotEmpty) {
-      for (final photo in activity.value!.place!.photos!) {
+    if (place.value?.photos != null && place.value!.photos!.isNotEmpty) {
+      for (final photo in place.value!.photos!) {
         if (photo.photoUrl != null && photo.photoUrl!.isNotEmpty) {
-          activityImages.add(photo.photoUrl!);
+          placeImages.add(photo.photoUrl!);
         }
       }
     }
 
     // If no images available, use placeholder
-    if (activityImages.isEmpty) {
-      activityImages.addAll([
+    if (placeImages.isEmpty) {
+      placeImages.addAll([
         'https://picsum.photos/400/300',
         'https://picsum.photos/400/301',
         'https://picsum.photos/400/302',
       ]);
     }
 
-    images.value = activityImages.toSet().toList(); // Remove duplicates
+    images.value = placeImages.toSet().toList(); // Remove duplicates
   }
 
   void updateCurrentImageIndex(int index) {
@@ -69,15 +74,14 @@ class ActivityDetailController extends BaseController {
   }
 
   void openWebsite() async {
-    final place = activity.value?.place;
-    if (place == null) return;
+    if (place.value == null) return;
 
     String? urlToOpen;
 
-    if (place.website != null && place.website!.isNotEmpty) {
-      urlToOpen = place.website!;
-    } else if (place.webUrl != null && place.webUrl!.isNotEmpty) {
-      urlToOpen = place.webUrl!;
+    if (place.value?.website != null && place.value!.website!.isNotEmpty) {
+      urlToOpen = place.value!.website!;
+    } else if (place.value?.webUrl != null && place.value!.webUrl!.isNotEmpty) {
+      urlToOpen = place.value!.webUrl!;
     }
 
     if (urlToOpen != null) {
@@ -93,22 +97,20 @@ class ActivityDetailController extends BaseController {
   }
 
   String get placeName {
-    if (activity.value?.place == null) return 'Unknown Place';
+    if (place.value == null) return 'Unknown Place';
 
     return Get.locale?.languageCode == 'vi'
-        ? (activity.value!.place!.localName ??
-            activity.value!.place!.name ??
-            'Unknown Place')
-        : (activity.value!.place!.name ?? 'Unknown Place');
+        ? (place.value!.localName ?? place.value!.name ?? 'Unknown Place')
+        : (place.value!.name ?? 'Unknown Place');
   }
 
   String get placeDescription {
-    final description = activity.value?.place?.description;
+    final description = place.value?.description;
     if (description != null && description.isNotEmpty) {
       return description;
     }
 
-    final placeType = activity.value?.place?.type;
+    final placeType = place.value?.type;
     switch (placeType) {
       case 'RESTAURANT':
         return 'defaultRestaurantDesc'.tr;
@@ -121,16 +123,75 @@ class ActivityDetailController extends BaseController {
     }
   }
 
-  double get rating => activity.value?.place?.rating ?? 4.5;
+  double get rating => place.value?.rating ?? 4.5;
 
-  int get reviewCount => activity.value?.place?.numberReview ?? 0;
+  int get reviewCount => place.value?.numberReview ?? 0;
 
   void navigateToMap() {
-    Get.toNamed(
-      PageName.mapPage,
+    if (place.value != null) {
+      final activityModel = ActivityModel(
+        itineraryActivityId: 0,
+        dayId: 0,
+        placeId: place.value!.placeId,
+        startTime: DateTime.now().toIso8601String(),
+        place: PlaceModel(
+          placeId: place.value!.placeId,
+          name: place.value!.name,
+          localName: place.value!.localName,
+          description: place.value!.description,
+          type: place.value!.type,
+          address: place.value!.address,
+          city: place.value!.city,
+          latitude: place.value!.latitude,
+          longitude: place.value!.longitude,
+          rating: place.value!.rating,
+          priceRange: place.value!.priceRange,
+          phone: place.value!.phone,
+          email: place.value!.email,
+          website: place.value!.website,
+          webUrl: place.value!.webUrl,
+          image: place.value!.image,
+          photos: place.value!.photos,
+          numberReview: place.value!.numberReview,
+        ),
+      );
+
+      Get.toNamed(
+        PageName.mapPage,
+        arguments: {
+          'activities': [activityModel],
+          'dayNumber': 0,
+        },
+      );
+    }
+  }
+
+  Future<void> addActivityToItinerary(
+      PlaceModel place, DateTime startTime) async {
+    subscribe(
+      future: _itineraryRepository.addActivityItinerary(dayId, body: {
+        "place_id": place.placeId,
+        "start_time": startTime.formatTime().toString(),
+      }),
+      observer: ObserverFunc(
+        onSubscribe: () {},
+        onSuccess: (response) {
+          showSimpleSuccessSnackBar(message: "activityAddedToItinerary".tr);
+          onNavigateItineraryPage();
+        },
+        onError: (error) {
+          showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
+        },
+      ),
+    );
+  }
+
+  void onNavigateItineraryPage() {
+    Get.offNamedUntil(
+      PageName.itineraryPage,
+      (route) => route.settings.name == PageName.mainPage,
       arguments: {
-        'activities': [activity.value],
-        'dayNumber': dayNumber,
+        'itineraryId': itineraryId,
       },
     );
   }

@@ -12,18 +12,21 @@ class ListBudget {
         name: 'economy'.tr,
         image: AppImages.icEconomy,
         isSelected: false,
+        value: 'Economy',
       ),
       BudgetModel(
         id: '2',
         name: 'normal'.tr,
         image: AppImages.icNormal,
         isSelected: false,
+        value: 'Normal',
       ),
       BudgetModel(
         id: '3',
         name: 'luxury'.tr,
         image: AppImages.icLuxury,
         isSelected: false,
+        value: 'Luxury',
       ),
     ],
   );

@@ -60,6 +60,13 @@ extension DateTimeExtension on DateTime {
     );
   }
 
+  String formatDateNoText() {
+    return DateTimeUtils.formatDateTime(
+      this,
+      pattern: 'yyyy-MM-dd',
+      locale: Get.locale?.toString(),
+    );
+  }
   String formatMonthDate() {
     return DateTimeUtils.formatDateTime(
       this,
@@ -68,6 +75,14 @@ extension DateTimeExtension on DateTime {
     );
   }
 
+  String formatTime() {
+    return DateTimeUtils.formatDateTime(
+      this,
+      pattern: 'HH:mm',
+      locale: Get.locale?.toString(),
+    );
+  }
+  
   String timeAgo() {
     return DateTimeUtils.calculateTimeAgo(this);
   }

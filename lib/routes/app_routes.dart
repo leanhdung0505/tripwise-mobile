@@ -21,14 +21,28 @@ import 'package:trip_wise_app/ui/plan/itinerary/binding/itinerary_binding.dart';
 import 'package:trip_wise_app/ui/plan/itinerary/screen/itinerary_page.dart';
 import 'package:trip_wise_app/ui/main/binding/main_binding.dart';
 import 'package:trip_wise_app/ui/main/screen/main_page.dart';
+import 'package:trip_wise_app/ui/plan/search_places/binding/search_places_binding.dart';
+import 'package:trip_wise_app/ui/plan/search_places/screen/search_places_page.dart';
 import 'package:trip_wise_app/ui/splash/binding/splash_binding.dart';
 
 import '../ui/auth/reset-password/binding/reset_password_binding.dart';
 import '../ui/auth/reset-password/screen/reset_password_page.dart';
 import '../ui/data-entry/duration/binding/duration_binding.dart';
 import '../ui/data-entry/duration/screen/duration_page.dart';
+import '../ui/data-entry/process_loading/binding/process_loading.dart';
+import '../ui/data-entry/process_loading/screen/process_loading_page.dart';
+import '../ui/favorite/screen/favorite_page.dart';
+import '../ui/favorite/binding/favorite_binding.dart';
+import '../ui/home/binding/home_binding.dart';
+import '../ui/home/screen/home_page.dart';
+import '../ui/personal/setting/binding/setting_binding.dart';
+import '../ui/personal/setting/screen/setting_page.dart';
 import '../ui/plan/map/binding/map_binding.dart';
 import '../ui/plan/map/screen/map_page.dart';
+import '../ui/personal/profile/binding/profile_binding.dart';
+import '../ui/personal/profile/screen/profile_page.dart';
+import '../ui/share/binding/share_binding.dart';
+import '../ui/share/screen/share_page.dart';
 import '../ui/splash/screen/splash_page.dart';
 import '../ui/success/binding/success_binding.dart';
 import '../ui/success/screen/success_page.dart';
@@ -37,6 +51,7 @@ abstract class PageName {
   static const splashPage = '/';
   static const mainPage = '/main';
   static const loginPage = '/login';
+  static const homePage = '/home';
   static const registerPage = '/register';
   static const forgotPasswordPage = '/forgot-password';
   static const resetPasswordPage = '/reset-password';
@@ -50,6 +65,12 @@ abstract class PageName {
   static const itineraryPage = '/itinerary-page';
   static const mapPage = '/map-page';
   static const activityDetailPage = '/activity-detail-page';
+  static const searchPlacesPage = '/search-places-page';
+  static const profilePage = '/profile-page';
+  static const favoritePage = '/favorite-page';
+  static const sharePage = '/share-page';
+  static const processLoadingPage = '/process-loading-page';
+  static const settingPage = '/setting-page';
 }
 
 abstract class Argument {}
@@ -67,6 +88,11 @@ class AppPages {
       name: PageName.mainPage,
       page: () => const MainPage(),
       binding: MainBinding(),
+    ),
+    GetPage(
+      name: PageName.homePage,
+      page: () => const HomePage(),
+      binding: HomeBinding(),
     ),
     GetPage(
       name: PageName.loginPage,
@@ -138,6 +164,36 @@ class AppPages {
       name: PageName.activityDetailPage,
       page: () => const ActivityDetailPage(),
       binding: ActivityDetailBinding(),
+    ),
+    GetPage(
+      name: PageName.searchPlacesPage,
+      page: () => const SearchPlacesPage(),
+      binding: SearchPlacesBinding(),
+    ),
+    GetPage(
+      name: PageName.profilePage,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: PageName.favoritePage,
+      page: () => const FavoritePage(),
+      binding: FavoriteBinding(),
+    ),
+    GetPage(
+      name: PageName.sharePage,
+      page: () => const SharePage(),
+      binding: ShareBinding(),
+    ),
+    GetPage(
+      name: PageName.processLoadingPage,
+      page: () => const ProcessLoadingPage(),
+      binding: ProcessLoadingBinding(),
+    ),
+    GetPage(
+      name: PageName.settingPage,
+      page: () => const SettingPage(),
+      binding: SettingBinding(),
     ),
   ];
 }

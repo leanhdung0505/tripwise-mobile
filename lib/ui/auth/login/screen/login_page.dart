@@ -30,11 +30,35 @@ class LoginPage extends BasePage<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: 60.h),
-                  Text(
-                    "signIn".tr,
-                    style: AppStyles.STYLE_32_BOLD.copyWith(
-                      color: AppColors.color3461FD,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "signIn".tr,
+                        style: AppStyles.STYLE_32_BOLD.copyWith(
+                          color: AppColors.color3461FD,
+                        ),
+                      ),
+                      PopupMenuButton<String>(
+                        onSelected: (value) {
+                          controller.changeLanguage(value);
+                        },
+                        icon: const Icon(
+                          Icons.language,
+                          color: AppColors.color3461FD,
+                        ),
+                        itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            value: 'en',
+                            child: Text('English'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'vi',
+                            child: Text('Tiếng Việt'),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                   SizedBox(height: 8.h),
                   Text(
@@ -101,7 +125,7 @@ class LoginPage extends BasePage<LoginController> {
                     children: [
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: controller.onGoogleSignIn,
                           style: OutlinedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 12.h),
                             backgroundColor: AppColors.colorF5F9FE,
@@ -136,7 +160,7 @@ class LoginPage extends BasePage<LoginController> {
                       SizedBox(width: 16.w),
                       Expanded(
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: controller.onGoogleSignIn,
                           style: OutlinedButton.styleFrom(
                             padding: EdgeInsets.symmetric(vertical: 12.h),
                             backgroundColor: AppColors.colorF5F9FE,
@@ -192,29 +216,6 @@ class LoginPage extends BasePage<LoginController> {
                         ),
                       ),
                     ],
-                  ),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 60.h,
-              right: 30.w,
-              child: PopupMenuButton<String>(
-                onSelected: (value) {
-                  controller.changeLanguage(value);
-                },
-                icon: const Icon(
-                  Icons.language,
-                  color: AppColors.color3461FD,
-                ),
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: 'en',
-                    child: Text('English'),
-                  ),
-                  const PopupMenuItem(
-                    value: 'vi',
-                    child: Text('Tiếng Việt'),
                   ),
                 ],
               ),

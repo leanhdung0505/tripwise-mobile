@@ -8,6 +8,6 @@ class ItineraryBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<ItineraryRepository>(ItineraryRepositoryImpl());
-    Get.put<ItineraryController>(ItineraryController());
+    Get.lazyPut<ItineraryController>(() => ItineraryController());
   }
 }

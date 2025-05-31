@@ -11,14 +11,120 @@ class ItineraryRepositoryImpl implements ItineraryRepository {
   }
 
   @override
-  Future<BaseResponse> getListItinerary({int page = 1, limit = 10}) {
+  Future<BaseResponse> getListItinerary({int page = 1, int limit = 10}) {
     return _apiService.getData(
         endPoint: Endpoint.getListItinerary,
         query: {'page': page, 'limit': limit});
+  }
+
+  @override
+  Future<BaseResponse> postItinerary({Map<String, dynamic>? body}) {
+    return _apiService.postData(
+      endPoint: Endpoint.getListItinerary,
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> updateItinerary(int id, {Map<String, dynamic>? body}) {
+    return _apiService.patchData(
+      endPoint: '${Endpoint.getDetailItinerary}$id',
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> deleteItinerary(int id) {
+    return _apiService.deleteData(
+      endPoint: '${Endpoint.getDetailItinerary}$id',
+    );
+  }
+
+  // Day Itinerary
+  @override
+  Future<BaseResponse> addDayItinerary(int id, {Map<String, dynamic>? body}) {
+    return _apiService.postData(
+      endPoint: '${Endpoint.getDetailItinerary}$id/days',
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> updateDayItinerary(int id,
+      {Map<String, dynamic>? body}) {
+    return _apiService.putData(
+      endPoint: '${Endpoint.dayItinerary}$id',
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> deleteDayItinerary(int id) {
+    return _apiService.deleteData(
+      endPoint: '${Endpoint.dayItinerary}$id',
+    );
+  }
+
+  // Activity Itinerary
+  @override
+  Future<BaseResponse> addActivityItinerary(int id,
+      {Map<String, dynamic>? body}) {
+    return _apiService.postData(
+      endPoint: '${Endpoint.dayItinerary}$id/activities',
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> updateActivityItinerary(int id,
+      {Map<String, dynamic>? body}) {
+    return _apiService.patchData(
+      endPoint: '${Endpoint.activityItinerary}$id',
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> deleteActivityItinerary(int id) {
+    return _apiService.deleteData(
+      endPoint: '${Endpoint.activityItinerary}$id',
+    );
+  }
+
+  @override
+  Future<BaseResponse> shareItinerary({Map<String, dynamic>? body}) {
+    return _apiService.postData(
+      endPoint: Endpoint.shareItinerary,
+      data: body,
+    );
+  }
+
+  @override
+  Future<BaseResponse> getSharedItinerary({int page = 1, int limit = 10}) {
+    return _apiService.getData(
+      endPoint: Endpoint.getSharedItinerary,
+      query: {'page': page, 'limit': limit},
+    );
+  }
+
+  @override
+  Future<BaseResponse> updateSharedUserPermission(
+      {Map<String, dynamic>? body}) {
+    return _apiService.putData(
+      endPoint: Endpoint.updateSharedUserPermission,
+      data: body,
+    );
   }
 }
 
 class Endpoint {
   static const getDetailItinerary = 'api/v1/itineraries/';
   static const getListItinerary = 'api/v1/itineraries';
+  static const dayItinerary = 'api/v1/itineraries/days/';
+  static const activityItinerary = 'api/v1/itineraries/activities/';
+  static const shareItinerary = 'api/v1/itinerary-shares';
+  static const getSharedItinerary =
+      'api/v1/itinerary-shares/me/shared-itineraries';
+  static const updateSharedUserPermission =
+      '/api/v1/itinerary-shares/permission/bulk-update-permissions';
 }

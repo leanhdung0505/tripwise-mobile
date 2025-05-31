@@ -48,7 +48,7 @@ class ItemInterestWidget extends StatelessWidget {
           Obx(
             () => GestureDetector(
               onTap: () {
-                controller.toggleInterest(interestModel.name.value);
+                controller.toggleInterest(interestModel.value.value);
               },
               child: SvgPicture.asset(
                 interestModel.isSelected.value

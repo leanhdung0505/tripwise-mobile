@@ -6,6 +6,7 @@ import 'package:trip_wise_app/common/base/controller/base_controller.dart';
 import 'package:trip_wise_app/common/constants.dart';
 import 'package:trip_wise_app/data/model/itinerary/activity_model.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:trip_wise_app/services/google_maps_service.dart';
 import '../../../../resource/theme/app_colors.dart';
 import '../screen/widget/custom_marker_helper.dart';
 import 'package:geolocator/geolocator.dart';
@@ -30,12 +31,53 @@ class MapController extends BaseController {
       CarouselSliderController();
   final RxInt currentPageIndex = 0.obs;
 
+  // Route variables
+  final RxBool isLoadingRoute = false.obs;
+  final RxBool showRoute = false.obs;
+  double? startLat;
+  double? startLng;
+  double? endLat;
+  double? endLng;
+  int? activityIndex;
+  bool? showCurrentLocation;
   @override
   void onInit() {
     super.onInit();
 
     if (Get.arguments != null && Get.arguments is Map) {
       final args = Get.arguments as Map;
+
+      // Handle route display if requested
+      if (args['showRoute'] == true) {
+        showRoute.value = true;
+        startLat = args['startLat'];
+        startLng = args['startLng'];
+        endLat = args['endLat'];
+        endLng = args['endLng'];
+        activityIndex = args['activityIndex'];
+        showCurrentLocation = args['showCurrentLocation'];
+        // Initialize activities from arguments
+        if (args['activities'] != null && args['activities'] is List) {
+          activities.value =
+              (args['activities'] as List).whereType<ActivityModel>().toList();
+        }
+
+        if (startLat != null &&
+            startLng != null &&
+            endLat != null &&
+            endLng != null &&
+            activities.isNotEmpty) {
+          initialCameraPosition.value = CameraPosition(
+            target: LatLng(startLat!, startLng!),
+            zoom: 13,
+          );
+          _createRouteMarkers();
+          _getRoutePolyline();
+        }
+        return;
+      }
+
+      // Handle normal activity display
       if (args['activities'] != null && args['activities'] is List) {
         activities.value =
             (args['activities'] as List).whereType<ActivityModel>().toList();
@@ -72,6 +114,7 @@ class MapController extends BaseController {
           activity.place?.longitude != null) {
         BitmapDescriptor markerIcon;
 
+        // Create custom marker based on place type
         if (activity.place?.type?.toLowerCase() == 'attraction') {
           final markerBytes =
               await CustomMarkerHelper.createAttractionMarker('${i + 1}');
@@ -81,15 +124,14 @@ class MapController extends BaseController {
               await CustomMarkerHelper.createRestaurantMarker('${i + 1}');
           markerIcon = BitmapDescriptor.bytes(markerBytes);
         } else if (activity.place?.type?.toLowerCase() == 'hotel') {
-          final hotelBytes =
+          final markerBytes =
               await CustomMarkerHelper.createHotelMarker('${i + 1}');
-          markerIcon = BitmapDescriptor.bytes(hotelBytes);
+          markerIcon = BitmapDescriptor.bytes(markerBytes);
         } else {
-          markerIcon = BitmapDescriptor.defaultMarkerWithHue(i == 0
-              ? BitmapDescriptor.hueGreen
-              : i == activities.length - 1
-                  ? BitmapDescriptor.hueRed
-                  : BitmapDescriptor.hueAzure);
+          // Default marker for unknown types
+          final markerBytes =
+              await CustomMarkerHelper.createAttractionMarker('${i + 1}');
+          markerIcon = BitmapDescriptor.bytes(markerBytes);
         }
 
         final markerId = MarkerId('marker_$i');
@@ -99,11 +141,15 @@ class MapController extends BaseController {
             activity.place!.latitude!,
             activity.place!.longitude!,
           ),
+          icon: markerIcon,
           infoWindow: InfoWindow(
             title: activity.place?.name ?? 'Location ${i + 1}',
             snippet: activity.formattedStartTime,
           ),
-          icon: markerIcon,
+          onTap: () {
+            currentPageIndex.value = i;
+            carouselController.animateToPage(i);
+          },
         );
         markers[markerId] = marker;
       }
@@ -251,13 +297,6 @@ class MapController extends BaseController {
     );
   }
 
-  @override
-  void onClose() {
-    pageController.dispose();
-    mapController.value?.dispose();
-    super.onClose();
-  }
-
   Future<void> moveToCurrentLocation() async {
     if (mapController.value == null) return;
     try {
@@ -297,10 +336,188 @@ class MapController extends BaseController {
     circles[circleId] = Circle(
       circleId: circleId,
       center: position,
-      radius: 100, 
+      radius: 100,
       fillColor: AppColors.color0AA3E4.withOpacity(0.3),
       strokeColor: AppColors.transparent,
       strokeWidth: 2,
     );
+  }
+
+  void zoomToActivity(int index) async {
+    if (index < 0 || index >= activities.length) return;
+
+    final activity = activities[index];
+    if (activity.place?.latitude == null || activity.place?.longitude == null)
+      return;
+
+    final position = CameraPosition(
+      target: LatLng(
+        activity.place!.latitude!,
+        activity.place!.longitude!,
+      ),
+      zoom: 16.0,
+    );
+
+    // Animate camera to the selected position
+    await mapController.value!.animateCamera(
+      CameraUpdate.newCameraPosition(position),
+    );
+
+    // Update current page index if needed
+    if (currentPageIndex.value != index) {
+      currentPageIndex.value = index;
+      // Optionally animate carousel to the selected item
+      carouselController.animateToPage(index);
+    }
+  }
+
+  Future<BitmapDescriptor> _getMarkerIcon(String type, String index) async {
+    switch (type.toLowerCase()) {
+      case 'restaurant':
+        return BitmapDescriptor.bytes(
+          await CustomMarkerHelper.createRestaurantMarker(index),
+        );
+      case 'hotel':
+        return BitmapDescriptor.bytes(
+          await CustomMarkerHelper.createHotelMarker(index),
+        );
+      case 'attraction':
+      default:
+        return BitmapDescriptor.bytes(
+          await CustomMarkerHelper.createAttractionMarker(index),
+        );
+    }
+  }
+
+  void _createRouteMarkers() async {
+    if (endLat == null || endLng == null  ) return;
+    if (showCurrentLocation == false) {
+      try {
+        final startActivity = activities[0];
+        final endActivity = activities[1];
+
+        if (startActivity.place?.latitude == null ||
+            startActivity.place?.longitude == null ||
+            endActivity.place?.latitude == null ||
+            endActivity.place?.longitude == null) return;
+
+        final startType = startActivity.place?.type ?? 'attraction';
+        final endType = endActivity.place?.type ?? 'attraction';
+
+        final startIcon =
+            await _getMarkerIcon(startType, '${activityIndex! + 1}');
+        final endIcon = await _getMarkerIcon(endType, '${activityIndex! + 2}');
+
+        markers[const MarkerId('start_marker')] = Marker(
+          markerId: const MarkerId('start_marker'),
+          position: LatLng(
+            startActivity.place!.latitude!,
+            startActivity.place!.longitude!,
+          ),
+          icon: startIcon,
+          infoWindow: InfoWindow(
+            title: startActivity.place?.name ?? 'Location 1',
+            snippet: startActivity.formattedStartTime,
+          ),
+        );
+
+        markers[const MarkerId('end_marker')] = Marker(
+          markerId: const MarkerId('end_marker'),
+          position: LatLng(
+            endActivity.place!.latitude!,
+            endActivity.place!.longitude!,
+          ),
+          icon: endIcon,
+          infoWindow: InfoWindow(
+            title: endActivity.place?.name ?? 'Location 2',
+            snippet: endActivity.formattedStartTime,
+          ),
+        );
+      } catch (e) {
+        print('Error creating route markers: $e');
+      }
+    } else {
+      final endActivity = activities[0];
+      if (endActivity.place?.latitude == null ||
+          endActivity.place?.longitude == null) return;
+      final endType = endActivity.place?.type ?? 'attraction';
+      final endIcon = await _getMarkerIcon(endType, '${activityIndex! + 1}');
+      markers[const MarkerId('end_marker')] = Marker(
+        markerId: const MarkerId('end_marker'),
+        position: LatLng(
+          endActivity.place!.latitude!,
+          endActivity.place!.longitude!,
+        ),
+        icon: endIcon,
+        infoWindow: InfoWindow(
+          title: endActivity.place?.name ?? 'Location 2',
+          snippet: endActivity.formattedStartTime,
+        ),
+      );
+    }
+  }
+
+  Future<void> _getRoutePolyline() async {
+    if (startLat == null ||
+        startLng == null ||
+        endLat == null ||
+        endLng == null) return;
+
+    isLoadingRoute.value = true;
+    try {
+      final routeData = await GoogleMapsService.getDirections(
+        startLat: startLat!,
+        startLng: startLng!,
+        endLat: endLat!,
+        endLng: endLng!,
+      );
+
+      final List<LatLng> polylineCoordinates = routeData['polylineCoordinates'];
+
+      final PolylineId polylineId = const PolylineId('route');
+      final Polyline polyline = Polyline(
+        polylineId: polylineId,
+        color: AppColors.color3461FD,
+        points: polylineCoordinates,
+        width: 4,
+      );
+
+      polylines[polylineId] = polyline;
+
+      // Fit the route on the map
+      if (mapController.value != null) {
+        final bounds = _boundsFromLatLngList(polylineCoordinates);
+        final cameraUpdate = CameraUpdate.newLatLngBounds(bounds, 50);
+        await mapController.value!.animateCamera(cameraUpdate);
+      }
+    } catch (e) {
+      print('Error getting route: $e');
+      showSimpleErrorSnackBar(message: 'Failed to load route');
+    } finally {
+      isLoadingRoute.value = false;
+    }
+  }
+
+  LatLngBounds _boundsFromLatLngList(List<LatLng> points) {
+    double? minLat, maxLat, minLng, maxLng;
+
+    for (final point in points) {
+      if (minLat == null || point.latitude < minLat) minLat = point.latitude;
+      if (maxLat == null || point.latitude > maxLat) maxLat = point.latitude;
+      if (minLng == null || point.longitude < minLng) minLng = point.longitude;
+      if (maxLng == null || point.longitude > maxLng) maxLng = point.longitude;
+    }
+
+    return LatLngBounds(
+      southwest: LatLng(minLat! - 0.01, minLng! - 0.01),
+      northeast: LatLng(maxLat! + 0.01, maxLng! + 0.01),
+    );
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    mapController.value?.dispose();
+    super.onClose();
   }
 }

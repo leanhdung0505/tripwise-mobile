@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:trip_wise_app/common/base/controller/base_controller.dart';
 import 'package:trip_wise_app/ui/data-entry/budget/model/list_budget.dart';
-
 import '../../../../routes/app_routes.dart';
 import '../model/budget_model.dart';
 
@@ -10,6 +9,7 @@ class BudgetController extends BaseController {
   RxString selectedBudget = ''.obs;
   RxBool isEnabledButton = false.obs;
   Rx<ListBudget> budgets = ListBudget().obs;
+  int itineraryId = 11;
 
   @override
   void onInit() {
@@ -22,7 +22,7 @@ class BudgetController extends BaseController {
     }
     // Đặt mục được chọn
     budget.isSelected.value = true;
-    selectedBudget.value = budget.name.value;
+    selectedBudget.value = budget.value.value;
     checkStatus();
   }
 
@@ -30,19 +30,17 @@ class BudgetController extends BaseController {
     isEnabledButton.value = selectedBudget.value.isNotEmpty;
   }
 
-  void onNavigateItineraryPage() {
+  void onNavigateProcessLoadingPage() {
     if (isEnabledButton.value) {
-      Get.toNamed(PageName.itineraryPage, arguments: {
+      Get.toNamed(PageName.processLoadingPage, arguments: {
         'startDate': Get.arguments['startDate'],
         'endDate': Get.arguments['endDate'],
+        'budget': selectedBudget.value,
+        'selectedInterests': Get.arguments['selectedInterests'],
+        'days': Get.arguments['days'],
       });
     }
   }
-
-  void onGenerate() {
-    print("Selected budget: $selectedBudget");
-  }
-
   @override
   void onClose() {
     super.onClose();

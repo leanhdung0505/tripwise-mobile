@@ -13,6 +13,14 @@ const Map<String, String> viVN = {
   "didNotGetOtp": "Bạn chưa nhận được mã xác thực? ",
   "loading": "Đang tải...",
   "vietNam": "Việt Nam",
+  "errorOccurred": "Đã xảy ra lỗi",
+  "activityAddedToItinerary":
+      "Hoạt động đã được thêm vào lịch trình thành công",
+  "home": "Trang chủ",
+  "share": "Chia sẻ",
+  "favorite": "Yêu thích",
+  "profile": "Hồ sơ",
+  "trips": "Chuyến đi",
 
   //Error
   "thisFieldIsRequired": "Trường này là bắt buộc",
@@ -33,6 +41,7 @@ const Map<String, String> viVN = {
   "or": "Hoặc",
   "don'tHaveAnAccount": "Bạn chưa có tài khoản?",
   "signUpNow": "Đăng ký ngay",
+  "loginSuccess": "Đăng nhập thành công",
 
   //Sign Up
   "signUp": "Đăng ký",
@@ -42,6 +51,7 @@ const Map<String, String> viVN = {
   "confirmPassword": "Xác nhận mật khẩu",
   "signUpButton": "Tạo tài khoản",
   "doYouHaveAnAccount": "Bạn đã có tài khoản?",
+  "registerSuccess": "Đăng ký thành công",
 
   //Forgot Password
   "forgotPasswordTitle": "Quên mật khẩu",
@@ -128,6 +138,29 @@ const Map<String, String> viVN = {
   "changeTimeDayActivity": "Thay đổi thời gian hoạt động",
   "detail": "Chi tiết hoạt động",
   "deleteActivity": "Xóa hoạt động",
+  "noActivities": "Không có hoạt động cho ngày @day",
+  "noDaySelected": "Không có ngày được chọn",
+  "confirmDeleteDay": "Xác nhận xóa ngày",
+  "confirmDeleteDayMessage": "Bạn có chắc chắn muốn xóa ngày này không?",
+  "deleteDay": "Xóa ngày",
+  "selectTime": "Chọn thời gian",
+  "done": "Hoàn tất",
+  "hotel": "Khách sạn",
+  "timeUpdatedSuccess": "Thời gian hoạt động đã được cập nhật thành công",
+  "confirmChange": "Xác nhận thay đổi",
+  "confirmChangeTime":
+      "Bạn có chắc chắn muốn thay đổi thời gian hoạt động này không?",
+  "changeTime": "Thay đổi",
+  "addNewRestaurant": "Thêm nhà hàng mới",
+  "addNewAttraction": "Thêm điểm tham quan mới",
+  "restaurant": "Nhà hàng",
+  "attraction": "Điểm tham quan",
+  "daNangVietnam": "Đà Nẵng, Việt Nam",
+  "noResult": "Không có kết quả",
+  "moreDetails": "Chi tiết",
+  "addDay": "Thêm ngày",
+  "selectDay": "Chọn ngày",
+  "addDaySuccess": "Ngày đã được thêm thành công",
 
   //Activity Detail
   "contactInformation": "Thông tin liên hệ",
@@ -146,4 +179,29 @@ const Map<String, String> viVN = {
   "defaultHotelDesc": "Chỗ ở thoải mái với tiện nghi và dịch vụ tuyệt vời.",
   "defaultPlaceDesc":
       "Một địa điểm tuyệt vời để tham quan với nhiều trải nghiệm độc đáo.",
+  "direction": "Chỉ đường",
+  "searchUsers": "Tìm kiếm người dùng",
+  "shareSuccess": "Lịch trình đã được chia sẻ thành công",
+  "viewOnly": "Xem",
+  "edit": "Chỉnh sửa",
+  "close": "Đóng",
+  "sharedUsers": "Người được chia sẻ",
+  "saveChanges": "Lưu thay đổi",
+  "updatePermissionsSuccess": "Quyền đã được cập nhật thành công",
+
+
+  //Home
+  "seeYourPlan": "Xem chi tiết",
+  "noTripsYet": "Bạn chưa có chuyến đi nào",
+  "pullToRefresh": "Kéo xuống để tải lại",
+
+  //Process Loading
+  "generateAiItinerary": "Tạo lịch trình AI",
+  "generateAiItineraryDescription":
+      "Bạn chỉ cần nhập điểm đến, thời gian và sở thích cá nhân – hệ thống AI sẽ tự động xây dựng một lịch trình du lịch chi tiết, hợp lý và tối ưu nhất dành riêng cho bạn. Từ điểm tham quan, nhà hàng đến các hoạt động phù hợp với ngân sách, mọi thứ sẽ được sắp xếp khoa học chỉ trong vài giây. Khám phá thế giới chưa bao giờ dễ dàng và thông minh đến vậy!",
+  "generateAiItineraryFooter": "Đang tạo lịch trình...",
+
+  //Setting
+  "setting": "Cài đặt",
+  "logout": "Đăng xuất",
 };

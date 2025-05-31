@@ -71,7 +71,7 @@ class RegisterController extends BaseController {
           onSubscribe: () {},
           onSuccess: (response) {
             if (response != null) {
-              showSimpleSuccessSnackBar(message: "Register successfully");
+              showSimpleSuccessSnackBar(message: "registerSuccess".tr);
               Get.offAllNamed(PageName.loginPage);
             }
           },

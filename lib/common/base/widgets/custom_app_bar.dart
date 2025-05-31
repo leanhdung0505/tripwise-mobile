@@ -73,6 +73,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           title.nullToEmpty,
           style: AppStyles.STYLE_20_BOLD.copyWith(
             color: AppColors.color262626,
+            fontSize: 22.sp,
           ),
         ),
         actions: actions,

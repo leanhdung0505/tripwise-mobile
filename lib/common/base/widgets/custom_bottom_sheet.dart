@@ -194,14 +194,14 @@ class _MenuOptionTile extends StatelessWidget {
 // Extension for easier usage
 extension BottomSheetHelper on BuildContext {
   void showMenuBottomSheet({
-    required List<MenuOption> options,
+    required List<MenuOption?> options,
     String? title,
     bool isDismissible = true,
     bool enableDrag = true,
   }) {
     CustomBottomSheetModal.show(
       context: this,
-      options: options,
+      options: options.where((option) => option != null).toList().cast<MenuOption>(),
       title: title,
       isDismissible: isDismissible,
       enableDrag: enableDrag,
