@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../common/base/controller/base_controller.dart';
 import '../../../../common/repository/auth_repository.dart';
+import '../../../../services/fcm_service.dart';
 
 import '../../../../common/base/controller/observer_func.dart';
 import '../../../../common/base/storage/local_data.dart';
@@ -20,6 +21,8 @@ class LoginController extends BaseController {
   AuthRepository repository = Get.find();
   final AuthRepository _authRepository = Get.find();
   final UserRepository _userRepository = UserRepositoryImpl();
+  final FCMService _fcmService = Get.find();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   Rx<bool> isShowPassword = true.obs;
@@ -56,9 +59,12 @@ class LoginController extends BaseController {
   Future<void> onLogin() async {
     if (isLoginButtonEnabled.value) {
       isLoading.value = true;
+      final deviceInfo = await _fcmService.getDeviceInfo();
       final request = LoginRequestModel(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
+        fcmToken: deviceInfo['fcm_token'],
+        device: deviceInfo['device_name'],
       );
       subscribe(
         future: _authRepository.login(
@@ -98,11 +104,14 @@ class LoginController extends BaseController {
     if (account == null) return;
     final GoogleSignInAuthentication auth = await account.authentication;
     final String? accessToken = auth.accessToken;
+    final deviceInfo = await _fcmService.getDeviceInfo();
 
     subscribe(
       future: _authRepository.googleSignIn(
         body: {
           'token': accessToken,
+          'fcm_token': deviceInfo['fcm_token'],
+          'device': deviceInfo['device_name'],
         },
       ),
       observer: ObserverFunc(

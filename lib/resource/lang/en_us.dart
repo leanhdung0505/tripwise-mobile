@@ -203,5 +203,5 @@ const Map<String, String> enUS = {
   "logout": "Logout",
   "myAccount": "My Account",
   "language": "Language",
-  
+  "logoutSuccess": "Logout Success",
 };

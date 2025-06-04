@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,6 +11,7 @@ import 'package:trip_wise_app/common/constants.dart';
 import 'package:trip_wise_app/resource/lang/translate_service.dart';
 import 'package:trip_wise_app/resource/theme/app_theme.dart';
 import 'package:trip_wise_app/routes/app_routes.dart';
+import 'package:trip_wise_app/services/fcm_service.dart';
 
 Future<void> main() async {
   await init();
@@ -19,6 +21,10 @@ Future<void> main() async {
 Future<void> init() async {
   await dotenv.load();
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase
+  await Firebase.initializeApp();
+  await Get.putAsync<FCMService>(() async => FCMService());
+
   HttpOverrides.global = MyHttpOverrides();
 }
 

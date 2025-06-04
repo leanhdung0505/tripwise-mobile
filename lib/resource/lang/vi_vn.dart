@@ -204,4 +204,5 @@ const Map<String, String> viVN = {
   //Setting
   "setting": "Cài đặt",
   "logout": "Đăng xuất",
+  "logoutSuccess": "Đăng xuất thành công",
 };
