@@ -115,6 +115,28 @@ class ItineraryRepositoryImpl implements ItineraryRepository {
       data: body,
     );
   }
+
+  @override
+  Future<BaseResponse> addToFavoriteItinerary(int id) {
+    return _apiService.postData(
+      endPoint: '${Endpoint.addToFavoriteItinerary}$id/favorite',
+    );
+  }
+
+  @override
+  Future<BaseResponse> removeFromFavoriteItinerary(int id) {
+    return _apiService.deleteData(
+      endPoint: '${Endpoint.removeFromFavoriteItinerary}$id/favorite',
+    );
+  }
+
+  @override
+  Future<BaseResponse> getFavoriteItinerary({int page = 1, int limit = 10}) {
+    return _apiService.getData(
+      endPoint: Endpoint.getFavoriteItinerary,
+      query: {'page': page, 'limit': limit},
+    );
+  }
 }
 
 class Endpoint {
@@ -127,4 +149,7 @@ class Endpoint {
       'api/v1/itinerary-shares/me/shared-itineraries';
   static const updateSharedUserPermission =
       '/api/v1/itinerary-shares/permission/bulk-update-permissions';
+  static const getFavoriteItinerary = 'api/v1/favorite-itineraries';
+  static const addToFavoriteItinerary = 'api/v1/itineraries/';
+  static const removeFromFavoriteItinerary = 'api/v1/itineraries/';
 }

@@ -9,4 +9,5 @@ abstract class AuthRepository {
   Future<BaseResponse> requestOtp({Map<String, dynamic>? body});
   Future<BaseResponse> googleSignIn({Map<String, dynamic>? body});
   Future<BaseResponse> logout();
+  Future<BaseResponse> refreshToken({String? refreshToken});
 }

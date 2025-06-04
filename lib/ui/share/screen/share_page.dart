@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:trip_wise_app/common/base/controller/base_page_widget.dart';
-import '../../../common/base/storage/local_data.dart';
 import '../../../common/base/widgets/app_button.dart';
 import '../../../data/model/itinerary/itinerary_model.dart';
 import '../../../resource/asset/app_images.dart';
@@ -24,20 +24,20 @@ class SharePage extends BasePage<ShareController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'TRIPWISE',
-                    style: AppStyles.STYLE_20_BOLD.copyWith(
-                      color: AppColors.color3461FD,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 15.h),
+              // SizedBox(height: 20.h),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Text(
+              //       'TRIPWISE',
+              //       style: AppStyles.STYLE_20_BOLD.copyWith(
+              //         color: AppColors.color3461FD,
+              //         fontWeight: FontWeight.w800,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              SizedBox(height: 25.h),
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: controller.refreshItineraryList,
@@ -48,7 +48,12 @@ class SharePage extends BasePage<ShareController> {
                     () {
                       if (controller.isLoading.value &&
                           controller.itineraryList.isEmpty) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: LoadingAnimationWidget.fourRotatingDots(
+                            color: AppColors.color3461FD,
+                            size: 50,
+                          ),
+                        );
                       }
 
                       if (controller.itineraryList.isEmpty) {

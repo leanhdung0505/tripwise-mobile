@@ -134,21 +134,25 @@ class AppPages {
       name: PageName.durationPage,
       page: () => const DurationPage(),
       binding: DurationBinding(),
+      transitionDuration: 100.milliseconds,
     ),
     GetPage(
       name: PageName.calendarPage,
       page: () => const CalendarPage(),
       binding: CalendarBinding(),
+      transitionDuration: 100.milliseconds,
     ),
     GetPage(
       name: PageName.interestsPage,
       page: () => const InterestsPage(),
       binding: InterestsBinding(),
+      transitionDuration: 100.milliseconds,
     ),
     GetPage(
       name: PageName.budgetPage,
       page: () => const BudgetPage(),
       binding: BudgetBinding(),
+      transitionDuration: 100.milliseconds,
     ),
     GetPage(
       name: PageName.itineraryPage,

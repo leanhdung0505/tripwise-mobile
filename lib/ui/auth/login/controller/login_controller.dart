@@ -29,6 +29,7 @@ class LoginController extends BaseController {
   Rx<bool> isChecked = false.obs;
   Rx<bool> isLoginButtonEnabled = false.obs;
   Rx<bool> isLoading = false.obs;
+  Rx<bool> isGoogleLoading = false.obs;
   final formKey = GlobalKey<FormState>();
   @override
   void onInit() {
@@ -75,6 +76,7 @@ class LoginController extends BaseController {
           onSuccess: (response) {
             final authResponse = AuthResponse.fromJson(response.body['data']);
             LocalData.shared.tokenData.val = authResponse.accessToken;
+            LocalData.shared.refreshTokenData.val = authResponse.refreshToken;
             showSimpleSuccessSnackBar(message: "loginSuccess".tr);
             saveUser();
             navigateMain();
@@ -91,6 +93,7 @@ class LoginController extends BaseController {
   }
 
   Future<void> onGoogleSignIn() async {
+    isGoogleLoading.value = true;
     final GoogleSignIn _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
@@ -119,6 +122,7 @@ class LoginController extends BaseController {
         onSuccess: (response) {
           final authResponse = AuthResponse.fromJson(response.body['data']);
           LocalData.shared.tokenData.val = authResponse.accessToken;
+          LocalData.shared.refreshTokenData.val = authResponse.refreshToken;
           showSimpleSuccessSnackBar(message: "loginSuccess".tr);
           isChecked.value = true;
           saveUser();
@@ -126,8 +130,10 @@ class LoginController extends BaseController {
         },
         onError: (error) {
           showSimpleErrorSnackBar(message: error.message ?? "");
+          isGoogleLoading.value = false;
         },
       ),
+      isShowLoading: true,
     );
   }
 

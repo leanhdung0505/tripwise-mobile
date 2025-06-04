@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:trip_wise_app/common/base/controller/base_page_widget.dart';
 import 'package:trip_wise_app/ui/plan/search_places/controller/search_places_controller.dart';
 import 'package:trip_wise_app/resource/theme/app_colors.dart';
@@ -166,11 +167,10 @@ class SearchPlacesPage extends BasePage<SearchPlacesController> {
                     (controller.isLoadingMore.value ? 1 : 0),
                 itemBuilder: (context, index) {
                   if (index == controller.searchResults.length) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      alignment: Alignment.center,
-                      child: const CircularProgressIndicator(
+                    return Center(
+                      child: LoadingAnimationWidget.fourRotatingDots(
                         color: AppColors.color3461FD,
+                        size: 50,
                       ),
                     );
                   }
@@ -212,7 +212,8 @@ class SearchPlacesPage extends BasePage<SearchPlacesController> {
                                       width: 60.w,
                                       height: 60.w,
                                       fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
                                         // If all photos fail, show placeholder
                                         return Image.network(
                                           'https://via.placeholder.com/60',
@@ -621,35 +622,68 @@ class SearchPlacesPage extends BasePage<SearchPlacesController> {
                                                 ),
                                               ),
                                               SizedBox(width: 12.w),
-                                              InkWell(
-                                                onTap: () async {
-                                                  final selectedTime =
-                                                      await AppTimePickerModal
-                                                          .show(
-                                                    context: context,
-                                                    title: 'selectTime'.tr,
-                                                    initialTime: DateTime.now(),
-                                                  );
-                                                  controller
-                                                      .addActivityToItinerary(
-                                                          place, selectedTime!);
-                                                },
-                                                child: Container(
-                                                  width: 45.w,
-                                                  height: 45.w,
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    color:
-                                                        AppColors.color3461FD,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    color: AppColors.white,
-                                                    size: 26.w,
-                                                  ),
-                                                ),
-                                              ),
+                                              controller.selectedType != "HOTEL"
+                                                  ? InkWell(
+                                                      onTap: () async {
+                                                        final selectedTime =
+                                                            await AppTimePickerModal
+                                                                .show(
+                                                          context: context,
+                                                          title:
+                                                              'selectTime'.tr,
+                                                          initialTime:
+                                                              DateTime.now(),
+                                                        );
+                                                        controller
+                                                            .addActivityToItinerary(
+                                                                place,
+                                                                selectedTime!);
+                                                      },
+                                                      child: Container(
+                                                        width: 45.w,
+                                                        height: 45.w,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: AppColors
+                                                              .color3461FD,
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: Icon(
+                                                          Icons.add,
+                                                          color:
+                                                              AppColors.white,
+                                                          size: 26.w,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : InkWell(
+                                                      onTap: () async {
+                                                        controller
+                                                            .editHotel(place);
+                                                      },
+                                                      child: Container(
+                                                        width: 45.w,
+                                                        height: 45.w,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          color: AppColors
+                                                              .color3461FD,
+                                                          shape:
+                                                              BoxShape.circle,
+                                                        ),
+                                                        child: FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child: SvgPicture.asset(
+                                                            AppImages.icEdit,
+                                                            width: 22.w,
+                                                            height: 22.h,
+                                                            color:
+                                                                AppColors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
                                             ],
                                           ),
                                         ),

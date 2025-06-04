@@ -33,6 +33,14 @@ class UserRepositoryImpl implements UserRepository {
       'itinerary_id': itineraryId,
     });
   }
+
+  @override
+  Future<BaseResponse> updateAvatar(String filePath) async {
+    return _apiService.uploadFile(
+      endPoint: Endpoint.updateAvatar,
+      filePath: filePath,
+    );
+  }
 }
 
 class Endpoint {
@@ -42,4 +50,5 @@ class Endpoint {
   static const String changePassword = '/api/v1/users/me/password';
   static const String searchUsersToShare =
       '/api/v1/itinerary-shares/search-users-to-share';
+  static const String updateAvatar = '/api/v1/users/me/avatar';
 }

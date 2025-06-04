@@ -6,6 +6,7 @@ import 'package:trip_wise_app/common/base/controller/base_page_widget.dart';
 import 'package:trip_wise_app/common/base/storage/local_data.dart';
 import 'package:trip_wise_app/resource/theme/app_colors.dart';
 import 'package:trip_wise_app/resource/theme/app_style.dart';
+import 'package:trip_wise_app/routes/app_routes.dart';
 import '../../../../common/base/widgets/custom_app_bar.dart';
 import '../../../../resource/asset/app_images.dart';
 import '../controller/setting_controller.dart';
@@ -37,12 +38,10 @@ class SettingPage extends BasePage<SettingController> {
                       width: 110.w,
                       height: 110.h,
                       child: CircleAvatar(
-                        backgroundImage:
-                            (user?.profilePicture != null)
-                                ? NetworkImage(
-                                    user!.profilePicture!)
-                                : const AssetImage(AppImages.imageUserDefault)
-                                    as ImageProvider,
+                        backgroundImage: (user?.profilePicture != null)
+                            ? NetworkImage(user!.profilePicture!)
+                            : const AssetImage(AppImages.imageUserDefault)
+                                as ImageProvider,
                       ),
                     ),
                     SizedBox(width: 16.w),
@@ -75,7 +74,9 @@ class SettingPage extends BasePage<SettingController> {
                     _buildMenuItem(
                       path: AppImages.icProfileCircle,
                       title: 'myAccount'.tr,
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(PageName.profilePage);
+                      },
                     ),
                     _buildMenuItem(
                       path: AppImages.icTranslate,

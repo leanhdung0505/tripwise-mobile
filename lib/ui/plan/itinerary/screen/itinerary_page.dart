@@ -744,11 +744,31 @@ class ItineraryPage extends BasePage<ItineraryController> {
   void _showItineraryMenu(BuildContext context) {
     final menuOptions = [
       MenuOption(
-        title: 'editPlan'.tr,
+        title: 'editHotel'.tr,
         iconPath: AppImages.icEdit,
         onTap: () {
-          // Handle edit plan
-          // controller.editPlan();
+          controller.navigateToSearchPlacesPage("HOTEL");
+        },
+      ),
+      MenuOption(
+        title: controller.itineraryModel.value?.isFavorite == true
+            ? 'removeFromFavorite'.tr
+            : 'addToFavorite'.tr,
+        iconPath: controller.itineraryModel.value?.isFavorite == true
+            ? AppImages.icHeartSlash
+            : AppImages.icLovely,
+        iconColor: controller.itineraryModel.value?.isFavorite == true
+            ? AppColors.color7C8BA0
+            : AppColors.colorFF4D4D,
+        titleColor: controller.itineraryModel.value?.isFavorite == true
+            ? AppColors.color7C8BA0
+            : AppColors.colorFF4D4D,
+        onTap: () {
+          if (controller.itineraryModel.value?.isFavorite == true) {
+            controller.removeFromFavorite();
+          } else {
+            controller.addToFavorite();
+          }
         },
       ),
       controller.itineraryModel.value?.owner?.userId ==

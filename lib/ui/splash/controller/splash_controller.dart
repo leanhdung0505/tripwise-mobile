@@ -26,7 +26,7 @@ class SplashController extends BaseController {
 
   void onNavigate() {
     if (LocalData.shared.isLogged.isTrue) {
-      Get.offAllNamed(PageName.loginPage);
+      Get.offAllNamed(PageName.mainPage);
     } else {
       Get.offAllNamed(PageName.loginPage);
     }

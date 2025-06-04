@@ -120,7 +120,6 @@ class VerifyCodeController extends BaseController {
   
   @override
   void onClose() {
-    pinCodeController.dispose();
     focusNode.dispose();
     super.onClose();
   }

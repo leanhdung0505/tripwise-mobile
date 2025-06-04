@@ -9,6 +9,7 @@ class LocalData {
 
   final isFirstRunApp = ReadWriteValue(Keys.isFirstRun, true);
   final tokenData = ReadWriteValue(Keys.token, '');
+  final refreshTokenData = ReadWriteValue(Keys.refreshToken, '');
   final userData = ReadWriteValue(Keys.user, '');
 
   bool? _isFirstRun;
@@ -64,4 +65,5 @@ class Keys {
   static const isFirstRun = "isFirstRun";
   static const token = 'userToken';
   static const user = 'userData';
+  static const refreshToken = 'refreshToken';
 }

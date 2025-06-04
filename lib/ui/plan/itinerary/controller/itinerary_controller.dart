@@ -243,6 +243,38 @@ class ItineraryController extends BaseController {
     );
   }
 
+  Future<void> addToFavorite() async {
+    subscribe(
+      future: _itineraryRepository.addToFavoriteItinerary(itineraryId),
+      observer: ObserverFunc(
+        onSubscribe: () {},
+        onSuccess: (response) {
+          showSimpleSuccessSnackBar(message: "addToFavoriteSuccess".tr);
+        },
+        onError: (error) {
+          showSimpleErrorSnackBar(message: error.message ?? "");
+        },
+      ),
+      isShowLoading: true,
+    );
+  }
+
+  Future<void> removeFromFavorite() async {
+    subscribe(
+      future: _itineraryRepository.removeFromFavoriteItinerary(itineraryId),
+      observer: ObserverFunc(
+        onSubscribe: () {},
+        onSuccess: (response) {
+          showSimpleSuccessSnackBar(message: "removeFromFavoriteSuccess".tr);
+        },
+        onError: (error) {
+          showSimpleErrorSnackBar(message: error.message ?? "");
+        },
+      ),
+      isShowLoading: true,
+    );
+  }
+
   void _createDummyDays() {
     final List<DayModel> dummyDays = [];
     final DateTime today = DateTime.now();

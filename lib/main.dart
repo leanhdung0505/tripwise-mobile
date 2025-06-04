@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ import 'package:trip_wise_app/services/fcm_service.dart';
 Future<void> main() async {
   await init();
   runApp(const App());
+  configLoading();
 }
 
 Future<void> init() async {
@@ -26,6 +29,26 @@ Future<void> init() async {
   await Get.putAsync<FCMService>(() async => FCMService());
 
   HttpOverrides.global = MyHttpOverrides();
+}
+
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 1000)
+    ..indicatorType = EasyLoadingIndicatorType.circle
+    ..maskType = EasyLoadingMaskType.black
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..indicatorColor = Colors.white
+    ..textColor = Colors.white
+    ..indicatorSize = 45.0
+    ..boxShadow = [
+      const BoxShadow(
+        color: Colors.transparent,
+      )
+    ]
+    ..radius = 10.0
+    ..backgroundColor = Colors.transparent
+    ..userInteractions = false
+    ..dismissOnTap = false;
 }
 
 class MyHttpOverrides extends HttpOverrides {
@@ -67,6 +90,7 @@ class App extends StatelessWidget {
         ],
         fallbackLocale: TranslationService.fallbackLocale,
         translations: TranslationService(),
+        builder: EasyLoading.init(),
         initialRoute: AppPages.initialRoute, // Use initialRoute from AppPages
         theme: AppTheme.dark,
         darkTheme: AppTheme.dark,

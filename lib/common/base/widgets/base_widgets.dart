@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
+import '../../../resource/theme/app_colors.dart';
 
 mixin class BaseCustomWidgets implements CustomWidgets {
   @override
@@ -113,11 +117,17 @@ mixin class BaseCustomWidgets implements CustomWidgets {
 
   @override
   void hideLoadingDialog() {
-
+    EasyLoading.dismiss();
   }
 
   @override
   void showLoadingDialog() {
+    EasyLoading.show(
+      indicator: LoadingAnimationWidget.fourRotatingDots(
+        color: AppColors.color3461FD,
+        size: 50,
+      ),
+    );
   }
 
   void showAlert({

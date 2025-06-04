@@ -13,11 +13,17 @@ class MainController extends BaseController {
   final pages = <int, Widget>{0: const HomePage()}.obs;
 
   var currentIndex = 0.obs;
+  final previousIndex = 0.obs;
 
+  // Cập nhật index với tracking previous cho slide animation
   void updateIndex(int index) {
-    currentIndex.value = index;
-    if (!pages.containsKey(index)) {
-      pages[index] = _getPageByIndex(index);
+    if (currentIndex.value != index) {
+      previousIndex.value = currentIndex.value;
+      currentIndex.value = index;
+
+      if (!pages.containsKey(index)) {
+        pages[index] = _getPageByIndex(index);
+      }
     }
   }
 
@@ -34,5 +40,12 @@ class MainController extends BaseController {
       default:
         return const HomePage();
     }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize previous index
+    previousIndex.value = currentIndex.value;
   }
 }

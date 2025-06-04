@@ -68,4 +68,20 @@ class ApiService {
     return apiConnect.patchData(
         endPoint: endPoint, query: query, data: data, header: header);
   }
+
+  Future<BaseResponse> uploadFile({
+    required String endPoint,
+    required String filePath,
+    Map<String, dynamic>? query,
+    Map<String, dynamic> header = const {},
+    Map<String, dynamic>? additionalData,
+  }) async {
+    return apiConnect.uploadFile(
+      endPoint: endPoint,
+      filePath: filePath,
+      query: query,
+      header: header,
+      additionalData: additionalData,
+    );
+  }
 }
