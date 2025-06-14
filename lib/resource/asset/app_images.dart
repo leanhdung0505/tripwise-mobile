@@ -65,4 +65,5 @@ class AppImages {
   static const icProfileCircle = '${assetsIcon}ic_profile_circle.svg';
   static const icTranslate = '${assetsIcon}ic_translate.svg';
   static const icLogout = '${assetsIcon}ic_logout.svg';
+  static const icHeartSlash = '${assetsIcon}ic_heart_slash.svg';
 }

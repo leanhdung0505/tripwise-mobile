@@ -6,4 +6,5 @@ abstract class UserRepository {
   Future<BaseResponse> deleteUser();
   Future<BaseResponse> changePassword(Map<String, dynamic> body);
   Future<BaseResponse> searchUsersToShare(String query, String itineraryId);
+  Future<BaseResponse> updateAvatar(String filePath);
 }

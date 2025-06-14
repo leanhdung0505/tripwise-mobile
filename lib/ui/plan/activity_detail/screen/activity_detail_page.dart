@@ -228,30 +228,53 @@ class ActivityDetailPage extends BasePage<ActivityDetailController> {
                 ),
               ),
               controller.dayNumber == -1
-                  ? InkWell(
-                      onTap: () async {
-                        final selectedTime = await AppTimePickerModal.show(
-                          context: context,
-                          title: 'selectTime'.tr,
-                          initialTime: DateTime.now(),
-                        );
-                        controller.addActivityToItinerary(
-                            controller.place.value!, selectedTime!);
-                      },
-                      child: Container(
-                        width: 45.w,
-                        height: 45.w,
-                        decoration: const BoxDecoration(
-                          color: AppColors.color3461FD,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.add,
-                          color: AppColors.white,
-                          size: 26.w,
-                        ),
-                      ),
-                    )
+                  ? controller.place.value?.type != "HOTEL"
+                      ? InkWell(
+                          onTap: () async {
+                            final selectedTime = await AppTimePickerModal.show(
+                              context: context,
+                              title: 'selectTime'.tr,
+                              initialTime: DateTime.now(),
+                            );
+                            controller.addActivityToItinerary(
+                                controller.place.value!, selectedTime!);
+                          },
+                          child: Container(
+                            width: 45.w,
+                            height: 45.w,
+                            decoration: const BoxDecoration(
+                              color: AppColors.color3461FD,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.add,
+                              color: AppColors.white,
+                              size: 26.w,
+                            ),
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () async {
+                            controller.editHotel(controller.place.value!);
+                          },
+                          child: Container(
+                            width: 45.w,
+                            height: 45.w,
+                            decoration: const BoxDecoration(
+                              color: AppColors.color3461FD,
+                              shape: BoxShape.circle,
+                            ),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: SvgPicture.asset(
+                                AppImages.icEdit,
+                                width: 22.w,
+                                height: 22.h,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ),
+                        )
                   : const SizedBox.shrink(),
             ],
           ),

@@ -168,7 +168,13 @@ const Map<String, String> enUS = {
   "sharedUsers": "Shared Users",
   "saveChanges": "Save Changes",
   "updatePermissionsSuccess": "Permissions updated successfully",
-  
+  "addToFavorite": "Add to Favorite",
+  "editHotel": "Edit Hotel",
+  "addToFavoriteSuccess": "Added to favorite successfully",
+  "hotelEdited": "Hotel updated successfully",
+  "removeFromFavoriteSuccess": "Removed from favorite successfully",
+  "removeFromFavorite": "Remove from favorite",
+
   //Activity Detail
   "contactInformation": "Contact Information",
   "about": "About",
@@ -204,4 +210,8 @@ const Map<String, String> enUS = {
   "myAccount": "My Account",
   "language": "Language",
   "logoutSuccess": "Logout Success",
+  "failedToPickImage": "Failed to pick image",
+  "failedToUploadAvatar": "Failed to upload avatar",
+  "failedToUpdateProfile": "Failed to update profile",
+  "profileUpdatedSuccessfully": "Profile updated successfully",
 };

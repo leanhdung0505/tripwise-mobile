@@ -76,6 +76,7 @@ class SearchPlacesController extends BaseController {
           showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
         },
       ),
+      isShowLoading: true,
     );
   }
 
@@ -113,6 +114,7 @@ class SearchPlacesController extends BaseController {
           showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
         },
       ),
+      isShowLoading: true,
     );
   }
 
@@ -304,9 +306,26 @@ class SearchPlacesController extends BaseController {
           showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
         },
       ),
+      isShowLoading: true,
     );
   }
-
+  Future<void> editHotel(PlaceModel place) async {
+    subscribe(
+      future: _itineraryRepository.updateItinerary(itineraryId, body: {
+        "hotel_id": place.placeId,
+      }),
+      observer: ObserverFunc(
+        onSubscribe: () {},
+        onSuccess: (response) {
+          showSimpleSuccessSnackBar(message: "hotelEdited".tr);
+        },
+        onError: (error) {
+          showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
+        },
+      ),
+      isShowLoading: true,
+    );
+  }
   void onNavigateItineraryPage() {
     Get.offNamedUntil(
       PageName.itineraryPage,

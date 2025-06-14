@@ -23,4 +23,9 @@ abstract class ItineraryRepository {
   Future<BaseResponse> shareItinerary({Map<String, dynamic>? body});
   Future<BaseResponse> getSharedItinerary({int page, int limit});
   Future<BaseResponse> updateSharedUserPermission({Map<String, dynamic>? body});
+
+  //Favorite Itinerary
+  Future<BaseResponse> addToFavoriteItinerary(int id);
+  Future<BaseResponse> removeFromFavoriteItinerary(int id);
+  Future<BaseResponse> getFavoriteItinerary({int page, int limit});
 }

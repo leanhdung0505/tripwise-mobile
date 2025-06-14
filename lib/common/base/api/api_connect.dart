@@ -120,6 +120,51 @@ class ApiConnect with DioMixin implements Dio {
       );
     }
   }
+
+  Future<BaseResponse> uploadFile({
+    String endPoint = "",
+    Map<String, dynamic> header = const {},
+    Map<String, dynamic>? query,
+    required String filePath,
+    String fieldName = 'file',
+    Map<String, dynamic>? additionalData,
+  }) async {
+    try {
+      FormData formData = FormData.fromMap({
+        fieldName: await MultipartFile.fromFile(
+          filePath,
+          filename: filePath.split('/').last,
+        ),
+      });
+
+      if (additionalData != null) {
+        additionalData.forEach((key, value) {
+          formData.fields.add(MapEntry(key, value.toString()));
+        });
+      }
+
+      final customOptions = Options(
+        headers: {
+          ...header,
+          'Content-Type': 'multipart/form-data',
+        },
+      );
+
+      final res = await post(
+        endPoint,
+        data: formData,
+        queryParameters: query,
+        options: customOptions,
+      );
+
+      return _convertResponseToResult(res);
+    } catch (e) {
+      return BaseResponse(
+        status: ApiConstants.isError,
+        messages: e.toString(),
+      );
+    }
+  }
 }
 
 class ApiConstants {

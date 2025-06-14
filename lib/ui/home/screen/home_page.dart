@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:trip_wise_app/common/base/controller/base_page_widget.dart';
 import 'package:trip_wise_app/data/model/itinerary/itinerary_model.dart';
 import 'package:trip_wise_app/resource/theme/app_style.dart';
@@ -63,7 +64,12 @@ class HomePage extends BasePage<HomeController> {
                     () {
                       if (controller.isLoading.value &&
                           controller.itineraryList.isEmpty) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                          child: LoadingAnimationWidget.fourRotatingDots(
+                            color: AppColors.color3461FD,
+                            size: 50,
+                          ),
+                        );
                       }
 
                       if (controller.itineraryList.isEmpty) {
@@ -114,10 +120,12 @@ class HomePage extends BasePage<HomeController> {
                           if (index == controller.itineraryList.length) {
                             return Padding(
                               padding: EdgeInsets.symmetric(vertical: 16.h),
-                              child: const Center(
-                                  child: CircularProgressIndicator(
-                                color: AppColors.color3461FD,
-                              )),
+                              child: Center(
+                                child: LoadingAnimationWidget.fourRotatingDots(
+                                  color: AppColors.color3461FD,
+                                  size: 50,
+                                ),
+                              ),
                             );
                           }
 

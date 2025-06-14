@@ -188,7 +188,13 @@ const Map<String, String> viVN = {
   "sharedUsers": "Người được chia sẻ",
   "saveChanges": "Lưu thay đổi",
   "updatePermissionsSuccess": "Quyền đã được cập nhật thành công",
-
+  "addToFavorite": "Thêm vào danh sách yêu thích",
+  "editHotel": "Chỉnh sửa khách sạn",
+  "addToFavoriteSuccess": "Đã thêm vào danh sách yêu thích",
+  "hotelEdited": "Khách sạn đã được cập nhật thành công",
+  "noFavoriteTrips": "Bạn chưa có chuyến đi nào trong danh sách yêu thích",
+  "removeFromFavoriteSuccess": "Đã xóa khỏi danh sách yêu thích",
+  "removeFromFavorite": "Xóa khỏi danh sách yêu thích",
 
   //Home
   "seeYourPlan": "Xem chi tiết",
@@ -205,4 +211,8 @@ const Map<String, String> viVN = {
   "setting": "Cài đặt",
   "logout": "Đăng xuất",
   "logoutSuccess": "Đăng xuất thành công",
+  "failedToPickImage": "Không thể chọn ảnh",
+  "failedToUploadAvatar": "Không thể tải ảnh lên",
+  "failedToUpdateProfile": "Không thể cập nhật hồ sơ",
+  "profileUpdatedSuccessfully": "Hồ sơ đã được cập nhật thành công",
 };

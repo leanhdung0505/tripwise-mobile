@@ -42,7 +42,15 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<BaseResponse> logout() {
-    return _apiService.postData(endPoint: Endpoint.logout,);
+    return _apiService.postData(endPoint: Endpoint.logout);
+  }
+
+  @override
+  Future<BaseResponse> refreshToken({String? refreshToken}) {
+    return _apiService.postData(
+      endPoint: Endpoint.refreshToken,
+      data: {'refresh_token': refreshToken},
+    );
   }
 }
 
@@ -55,4 +63,5 @@ class Endpoint {
   static const requestOtp = '/api/v1/otp/request';
   static const googleSignIn = '/api/v1/google/login';
   static const logout = '/api/v1/logout';
+  static const refreshToken = '/api/v1/login/refresh-token';
 }

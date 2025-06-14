@@ -135,60 +135,40 @@ class LoginPage extends BasePage<LoginController> {
                               borderRadius: BorderRadius.circular(14.r),
                             ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: SvgPicture.asset(
-                                  AppImages.icFacebook,
-                                  height: 24.h,
-                                  width: 24.w,
+                          child: Obx(
+                            () => Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                controller.isGoogleLoading.value
+                                    ? Padding(
+                                        padding: EdgeInsets.only(right: 20.w),
+                                        child: SizedBox(
+                                          height: 20.h,
+                                          width: 20.h,
+                                          child: const CircularProgressIndicator(
+                                            color: AppColors.color0AA3E4,
+                                            strokeWidth: 3.0,
+                                          ),
+                                        ),
+                                      )
+                                    : const SizedBox.shrink(),
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: SvgPicture.asset(
+                                    AppImages.icGoogle,
+                                    height: 24.h,
+                                    width: 24.w,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 8.w),
-                              Text(
-                                'Facebook',
-                                style: AppStyles.STYLE_14.copyWith(
-                                  color: AppColors.color7C8BA0,
+                                SizedBox(width: 8.w),
+                                Text(
+                                  'Google',
+                                  style: AppStyles.STYLE_14.copyWith(
+                                    color: AppColors.color7C8BA0,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 16.w),
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: controller.onGoogleSignIn,
-                          style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 12.h),
-                            backgroundColor: AppColors.colorF5F9FE,
-                            side:
-                                const BorderSide(color: AppColors.transparent),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.r),
+                              ],
                             ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: SvgPicture.asset(
-                                  AppImages.icGoogle,
-                                  height: 24.h,
-                                  width: 24.w,
-                                ),
-                              ),
-                              SizedBox(width: 8.w),
-                              Text(
-                                'Google',
-                                style: AppStyles.STYLE_14.copyWith(
-                                  color: AppColors.color7C8BA0,
-                                ),
-                              ),
-                            ],
                           ),
                         ),
                       ),

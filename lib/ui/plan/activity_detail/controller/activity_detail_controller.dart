@@ -183,6 +183,26 @@ class ActivityDetailController extends BaseController {
           showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
         },
       ),
+      isShowLoading: true,
+    );
+  }
+
+  Future<void> editHotel(PlaceModel place) async {
+    subscribe(
+      future: _itineraryRepository.updateItinerary(itineraryId, body: {
+        "hotel_id": place.placeId,
+      }),
+      observer: ObserverFunc(
+        onSubscribe: () {},
+        onSuccess: (response) {
+          showSimpleSuccessSnackBar(message: "hotelEdited".tr);
+          onNavigateItineraryPage();
+        },
+        onError: (error) {
+          showSimpleErrorSnackBar(message: error.message ?? "errorOccurred".tr);
+        },
+      ),
+      isShowLoading: true,
     );
   }
 
