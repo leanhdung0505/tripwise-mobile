@@ -14,6 +14,9 @@ class DurationController extends BaseController {
 
   void incrementDays() {
     days.value++;
+    if (days.value > 30) {
+      days.value = 30;
+    }
     checkStatus();
   }
 
@@ -30,7 +33,7 @@ class DurationController extends BaseController {
 
   void onNext() {
     Get.toNamed(PageName.calendarPage, arguments: {
-      "days": days.value-1,
+      "days": days.value - 1,
     });
   }
 

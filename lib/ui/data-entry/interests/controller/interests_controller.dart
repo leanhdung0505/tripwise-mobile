@@ -19,20 +19,20 @@ class InterestsController extends BaseController {
   void toggleInterest(String interestName) {
     InterestModel? foundInterest;
     for (var interest in interests.value.listInterest.value) {
-      if (interest.name.value == interestName) {
+      if (interest.value.value == interestName) {
         foundInterest = interest;
         break;
       }
     }
     if (foundInterest != null) {
       foundInterest.isSelected.value = !foundInterest.isSelected.value;
-      
+
       if (foundInterest.isSelected.value) {
-        if (!selectedInterests.contains(interestName)) {
-          selectedInterests.add(interestName);
+        if (!selectedInterests.contains(foundInterest.value.value)) {
+          selectedInterests.add(foundInterest.value.value);
         }
       } else {
-        selectedInterests.remove(interestName);
+        selectedInterests.remove(foundInterest.value.value);
       }
       checkStatus();
     }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trip_wise_app/common/base/widgets/base_page_widget.dart';
+import 'package:trip_wise_app/resource/asset/app_images.dart';
 import 'package:trip_wise_app/ui/splash/controller/splash_controller.dart';
 
 class SplashPage extends BasePage<SplashController> {
@@ -8,8 +9,15 @@ class SplashPage extends BasePage<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: Colors.white,
-    ));
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Image.asset(
+            AppImages.imageLogoSplash,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+    );
   }
 }

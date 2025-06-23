@@ -36,14 +36,12 @@ class ApiInterceptor extends InterceptorsWrapper {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    if (err.response?.statusCode == 401 && LocalData.shared.isLogged) {
+    if (err.response?.statusCode == 403 && LocalData.shared.isLogged) {
       final refreshToken = LocalData.shared.refreshTokenData.val;
       if (refreshToken.isEmpty) {
         _handleLogout();
         return handler.next(err);
       }
-
-      // Nếu đang refresh, xếp request vào hàng đợi
       if (_isRefreshing) {
         _retryQueue.add(() async {
           try {
@@ -65,7 +63,6 @@ class ApiInterceptor extends InterceptorsWrapper {
         final response =
             await _authRepository.refreshToken(refreshToken: refreshToken);
         if (response.status == "OK" && response.body != null) {
-          // Lưu lại token mới
           LocalData.shared.tokenData.val = response.body['access_token'];
           LocalData.shared.refreshTokenData.val =
               response.body['refresh_token'];

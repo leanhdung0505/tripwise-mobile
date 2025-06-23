@@ -23,7 +23,7 @@ class ProfilePage extends BasePage<ProfileController> {
     return Scaffold(
       backgroundColor: AppColors.white,
       appBar: CustomAppBar(
-        title: 'Profile',
+        title: 'myAccount'.tr,
         showLeading: true,
         onTap: () {
           Get.back();
@@ -123,6 +123,8 @@ class ProfilePage extends BasePage<ProfileController> {
               SizedBox(height: 12.h),
               AppTextFiled(
                 labelText: 'fullName'.tr,
+                labelStyle: AppStyles.STYLE_14_BOLD
+                    .copyWith(color: AppColors.color3B4054),
                 controller: controller.fullNameController,
                 height: 60.h,
                 hintText: 'fullName'.tr,
@@ -138,7 +140,7 @@ class ProfilePage extends BasePage<ProfileController> {
               ),
               SizedBox(height: 24.h),
               Obx(() => AppButton(
-                    text: "Save Changes",
+                    text: "saveChanges".tr,
                     onPressed: controller.hasChanges.value &&
                             !controller.isLoading.value
                         ? controller.saveChanges
