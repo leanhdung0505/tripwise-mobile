@@ -6,6 +6,7 @@ class AppImages {
   static const earth = '${assetsImage}earth.jpg';
   static const earthGif = '${assetsImage}earth_gif.png';
   static const imageUserDefault = '${assetsImage}image_user_default.jpg';
+  static const imageLogoSplash = '${assetsImage}app_logo.png';
 
   static const icUser = '${assetsIcon}ic_user.svg';
   static const icKey = '${assetsIcon}ic_key.svg';
@@ -66,4 +67,5 @@ class AppImages {
   static const icTranslate = '${assetsIcon}ic_translate.svg';
   static const icLogout = '${assetsIcon}ic_logout.svg';
   static const icHeartSlash = '${assetsIcon}ic_heart_slash.svg';
+  static const icSetting = '${assetsIcon}setting.svg';
 }

@@ -125,8 +125,8 @@ class GenerateAiItineraryModel {
     final map = <String, dynamic>{};
     map['title'] = title;
     map['description'] = description;
-    map['start_date'] = startDate?.toIso8601String();
-    map['end_date'] = endDate?.toIso8601String();
+    map['start_date'] = startDate?.toIso8601String().split('T')[0];
+    map['end_date'] = endDate?.toIso8601String().split('T')[0];
     map['budget_category'] = budgetCategory;
     map['duration'] = duration;
     map['destination_city'] = destinationCity;

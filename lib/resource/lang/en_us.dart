@@ -107,7 +107,8 @@ const Map<String, String> enUS = {
   "economy": "Economy",
   "normal": "Normal",
   "luxury": "Luxury",
-
+  "createManualItinerary": "Create Manual Itinerary",
+  "createManualItinerarySuccess": "Itinerary has been created successfully",
   //Success
   "successTitle": "Success",
   "successDescription": "Your password has been reset successfully",
@@ -214,4 +215,13 @@ const Map<String, String> enUS = {
   "failedToUploadAvatar": "Failed to upload avatar",
   "failedToUpdateProfile": "Failed to update profile",
   "profileUpdatedSuccessfully": "Profile updated successfully",
+
+  //Change Password
+  "changePassword": "Change Password",
+  "changePasswordDescription":
+      "Please enter your old password and new password to change your password",
+  "enterOldPassword": "Enter your old password",
+  "enterNewPassword": "Enter your new password",
+  "confirmNewPassword": "Confirm your new password",
+  "passwordChangedSuccessfully": "Password changed successfully",
 };

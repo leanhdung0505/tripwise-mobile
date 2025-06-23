@@ -63,5 +63,5 @@ class Endpoint {
   static const requestOtp = '/api/v1/otp/request';
   static const googleSignIn = '/api/v1/google/login';
   static const logout = '/api/v1/logout';
-  static const refreshToken = '/api/v1/login/refresh-token';
+  static const refreshToken = '/api/v1/login/refresh';
 }

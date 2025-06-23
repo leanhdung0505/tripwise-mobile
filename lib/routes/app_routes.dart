@@ -46,6 +46,8 @@ import '../ui/share/screen/share_page.dart';
 import '../ui/splash/screen/splash_page.dart';
 import '../ui/success/binding/success_binding.dart';
 import '../ui/success/screen/success_page.dart';
+import '../ui/personal/change_password/binding/change_password_binding.dart';
+import '../ui/personal/change_password/screen/change_password_page.dart';
 
 abstract class PageName {
   static const splashPage = '/';
@@ -71,6 +73,7 @@ abstract class PageName {
   static const sharePage = '/share-page';
   static const processLoadingPage = '/process-loading-page';
   static const settingPage = '/setting-page';
+  static const changePasswordPage = '/change-password';
 }
 
 abstract class Argument {}
@@ -198,6 +201,11 @@ class AppPages {
       name: PageName.settingPage,
       page: () => const SettingPage(),
       binding: SettingBinding(),
+    ),
+    GetPage(
+      name: PageName.changePasswordPage,
+      page: () => const ChangePasswordPage(),
+      binding: ChangePasswordBinding(),
     ),
   ];
 }

@@ -54,8 +54,8 @@ class ItemInterestWidget extends StatelessWidget {
                 interestModel.isSelected.value
                     ? AppImages.icToggleOn
                     : AppImages.icToggleOff,
-                height: 24.h,
-                width: 24.h,
+                height: 30.h,
+                width: 30.h,
               ),
             ),
           ),

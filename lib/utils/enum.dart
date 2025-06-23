@@ -22,7 +22,7 @@ enum MenuItem {
   home(AppImages.icTravel, AppImages.icTravel, 'trips', 0),
   share(AppImages.icShare, AppImages.icShare, 'share', 1),
   favorite(AppImages.icLovely, AppImages.icLovely, 'favorite', 2),
-  profile(AppImages.icProfileOn, AppImages.icProfileOn, 'profile', 3);
+  profile(AppImages.icSetting, AppImages.icSetting, 'setting', 3);
 
   final String iconPath;
   final String iconSelectedPath;

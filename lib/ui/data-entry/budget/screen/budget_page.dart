@@ -65,6 +65,25 @@ class BudgetPage extends BasePage<BudgetController> {
                   ),
                 ),
               ),
+              SizedBox(height: 20.h),
+              Obx(
+                () => AppButton(
+                  text: "createManualItinerary".tr,
+                  onPressed: controller.createManualItinerary,
+                  height: 50.h,
+                  width: 300.w,
+                  borderRadius: BorderRadius.circular(12.r),
+                  bgColor: AppColors.white,
+                  unEnabled: !controller.isEnabledButton.value,
+                  enabledColor: AppColors.white,
+                  textColor: AppColors.color3461FD,
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  elevation: 0,
+                  boderColor: controller.isEnabledButton.value
+                      ? AppColors.color3461FD
+                      : AppColors.color3461FD.withOpacity(0.4),
+                ),
+              ),
             ],
           ),
         ),

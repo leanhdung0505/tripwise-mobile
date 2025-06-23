@@ -109,7 +109,8 @@ const Map<String, String> viVN = {
   "economy": "Tiết kiệm",
   "normal": "Bình thường",
   "luxury": "Sang trọng",
-
+  "createManualItinerary": "Tạo lịch trình thủ công",
+  "createManualItinerarySuccess": "Lịch trình đã được tạo thành công",
   //Success
   "successTitle": "Thành công",
   "successDescription": "Mật khẩu của bạn đã được đặt lại thành công",
@@ -215,4 +216,15 @@ const Map<String, String> viVN = {
   "failedToUploadAvatar": "Không thể tải ảnh lên",
   "failedToUpdateProfile": "Không thể cập nhật hồ sơ",
   "profileUpdatedSuccessfully": "Hồ sơ đã được cập nhật thành công",
+  "myAccount": "Hồ sơ của tôi",
+  "language": "Ngôn ngữ",
+
+  //Change Password
+  "changePassword": "Đổi mật khẩu",
+  "changePasswordDescription":
+      "Vui lòng nhập mật khẩu cũ và mật khẩu mới để thay đổi mật khẩu của bạn",
+  "enterOldPassword": "Nhập mật khẩu cũ",
+  "enterNewPassword": "Nhập mật khẩu mới",
+  "confirmNewPassword": "Xác nhận mật khẩu mới",
+  "passwordChangedSuccessfully": "Đổi mật khẩu thành công",
 };
